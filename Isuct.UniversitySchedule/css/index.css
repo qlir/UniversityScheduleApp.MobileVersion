@@ -1,0 +1,175 @@
+﻿* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body,html {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    
+    
+    -ms-overflow-style: none;
+    -ms-content-zooming: none;
+
+    background-attachment: fixed;
+    overflow: hidden;
+
+    font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+/*
+        text-transform:uppercase;
+*/
+}
+
+body{
+    /*padding-top: 60px;*/
+    padding-top: 150px;
+    padding-bottom: 70px;
+    
+}
+
+.appName {
+    margin-top: 0;
+    text-align: center;
+}
+
+.item {
+
+}
+
+.day{
+    position:fixed;
+    top: 70px;
+    left: 0px;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    background-color: gray;
+}
+.day >* {
+    margin-top: 10px
+}
+
+.schedule {
+    position:relative;
+    -ms-touch-action:auto;
+    height:100%;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    border-color: gray;
+    border-style: solid;
+}
+
+.leftPanel {
+    position: absolute;
+    top:0;
+    left: 0px;
+    height: 100%;
+    width: 20px;
+    background-color: gray;
+}
+
+.rightPanel {
+    position: absolute;
+    top:0;
+    right: 0px;
+    height: 100%;
+    width: 20px;
+    background-color: gray;
+}
+
+.scheduleItems {
+    padding-top: 15px;
+    overflow: auto;
+    height:100%;
+    width:100%;
+}
+
+.details {
+    position: relative;
+}
+
+.professor {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 33.3%;
+}
+
+.room {
+    position: absolute;
+    top: 0px;
+    width: 33.4%;
+    left: 33.3%;
+}
+
+.type {
+   position: absolute;
+   top: 0px;
+   right: 0px;
+   width: 33.3%;
+}
+
+/* static panels */
+.topPanel {
+   position: fixed;
+   padding-right: 73px;
+   width: 100%;
+   height:70px;
+   top:0;
+   background-color: cornflowerblue;
+   border-style: solid ;
+   border-color: cornflowerblue ;
+}
+
+.group {
+    width: 100%;
+    height:100%;
+}
+
+.menuButton {
+    position: absolute;
+    width: 70px;
+    height:100%;
+    right: 0px;
+    top: 0px;
+}
+
+
+.bottomPanel {
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    height:70px;
+    padding-left: 73px;
+    padding-right: 73px;
+    background-color: cornflowerblue;
+    border-style: solid ;
+    border-color: cornflowerblue ;
+}
+
+.leftBottomButton {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 70px;
+    height: 100%;
+}
+
+.centerBottomButton {
+    width: 100%;
+    height: 100%;
+}
+
+.rightBottomButton {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 70px;
+    height: 100%;
+}
