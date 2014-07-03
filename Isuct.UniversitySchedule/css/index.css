@@ -36,10 +36,6 @@ body{
     text-align: center;
 }
 
-.item {
-
-}
-
 .day{
     position:fixed;
     top: 70px;
@@ -90,29 +86,23 @@ body{
     width:100%;
 }
 
-.details {
-    position: relative;
+.item{
+
 }
 
-.professor {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 33.3%;
+.time {
+    margin-left:-10px;
+    margin-top:-5px;
 }
 
-.room {
-    position: absolute;
-    top: 0px;
-    width: 33.4%;
-    left: 33.3%;
+.lessonName {
+
 }
 
-.type {
-   position: absolute;
-   top: 0px;
-   right: 0px;
-   width: 33.3%;
+.description {
+    text-indent: 20px;
+    border-top-style:solid;
+    border-width: 1px;
 }
 
 /* static panels */
