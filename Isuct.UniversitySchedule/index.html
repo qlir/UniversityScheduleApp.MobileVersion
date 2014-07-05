@@ -8,67 +8,55 @@
 
     <title>BlankCordovaApp1</title>
 
-    <link href="lib/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="lib/bootstrap-3.2.0/css/bootstrap-theme.min.css">
-
     <link href="css/index.css" rel="stylesheet" />
     <script src="lib/jquery-2.1.1.js"></script>
-    <script src="lib//bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    
+    <script src="lib/angular.js"></script>
     <!--<script src="lib/jquery-1.11.1.js"></script>-->
+    <link rel="stylesheet" href="lib/jquery.mobile-1.4.3.css" />
+    <script src="lib/jquery.mobile-1.4.3.min.js"></script>
 </head>
 <body>
-    <!--<h1 class="appName headerAppColor">Рассписание ИГХТУ</h1>-->
-    <!-- Split button -->
-    
-        <!--<h1 class="topPanel panel panel-primary"><span>Группа 4/42</span><b class="caret"></b><button class="menuButton btn btn-default btn-lg pull-right ">Menu</button></h1>-->
-        <div class="schedule">
+<div data-role="header" data-position="fixed" >
+    <h1>Рассписание ИГХТУ</h1>
+    <a href="#" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Меню</a>
+</div>
+<select data-native-menu="false" data-position="fixed" data-mini="true">
+    <option value="1">Группа 4/42</option>
+    <option value="2">The 2nd Option</option>
+    <option value="3">The 3rd Option</option>
+    <option value="4">The 4th Option</option>
+</select>
+    <div class="schedule">
             <div class="day">
-                <h3>1 июня</h3>
-                <h3>ЧТ I-неделя</h3>
+                <div>1 июня</div>
+                <div>ЧТ I-неделя</div>
             </div>
-            <!--<div class="days">
-                <div class="day">
-                    <p>1 июня</p>
-                    <p>ЧТ I-неделя</p>
-                </div>
-                <div class="day activeDay">
-                    <p>1 июня</p>
-                    <p>ЧТ I-неделя</p>
-                </div>
-                <div class="day">
-                    <p>1 июня</p>
-                    <p>ЧТ I-неделя</p>
-                </div>
-            </div>-->
-            <div class="scheduleItems container">
-                <div class="list-group">
-                    <a  class="item list-group-item list-group-item-success">
-                        <h4 class="time ">8:00 - 9:35</h4>
-                        <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
-                        <div class="description">
-                            пр.з., A300, Профессор
-                        </div>                    
-                    </a>
-                    <a  class="item list-group-item list-group-item-info">
-                        <h4 class="time list-group-item-heading">8:00 - 9:35</h4>
-                        <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
-                        <div class="description">пр.з., A300, Профессор
-                        </div>
-                    </a>
-                    <a  class="item list-group-item list-group-item-warning">
-                        <h4 class="time list-group-item-heading">8:00 - 9:35</h4>
-                        <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
-                        <div class="description">пр.з., A300, Профессор
-                        </div>
-                    </a>
-                    <a  class="item list-group-item">
-                        <h4 class="time list-group-item-heading">8:00 - 9:35</h4>
-                        <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
-                        <div class="description">пр.з., A300, Профессор
-                        </div>
-                    </a>
-                </div>
+            <div class="scheduleItems">
+                <a  class="item">
+                    <h4 class="time ">8:00 - 9:35</h4>
+                    <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
+                    <div class="description">
+                        пр.з., A30, Профессор
+                    </div>
+                </a>
+                <a  class="item">
+                    <h4 class="time">8:00 - 9:35</h4>
+                    <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
+                    <div class="description">пр.з., A300, Профессор
+                    </div>
+                </a>
+                <a  class="item ">
+                    <h4 class="time">8:00 - 9:35</h4>
+                    <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
+                    <div class="description">пр.з., A300, Профессор
+                    </div>
+                </a>
+                <a  class="item">
+                    <h4 class="time">8:00 - 9:35</h4>
+                    <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
+                    <div class="description">пр.з., A300, Профессор
+                    </div>
+                </a>
             </div>
             <div class="leftPanel">
 
@@ -78,19 +66,19 @@
 
             </div>
         </div>
-   
-    <div class="topPanel">
-        <button type="button" class="group btn btn-primary btn-lg">Группа 4/42 <span class="caret"></span></button>
-        <button class="menuButton btn btn-primary btn-lg ">Menu</button>
+<div data-role="footer" data-position="fixed" class="nav-glyphish-example" data-theme="b">
+    <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+        <ul>
+            <li><a href="#" id="chat" data-icon="custom">Chat</a></li>
+            <li><a href="#" id="email" data-icon="custom">Email</a></li>
+            <li><a href="#" id="skull" data-icon="custom">Danger</a></li>
+            <li><a href="#" id="beer" data-icon="custom">Beer</a></li>
+            <li><a href="#" id="coffee" data-icon="custom">Coffee</a></li>
+        </ul>
     </div>
+</div>
 
-    <div class="bottomPanel">
-        <button type="button" class="leftBottomButton btn btn-lg btn-primary">Left</button>
-        <button type="button" class="centerBottomButton btn btn-lg btn-primary">Middle</button>
-        <button type="button" class="rightBottomButton btn btn-lg btn-primary">Right</button>
-    </div>
         <script src="cordova.js"></script>
-
         <script src="scripts/index.js"></script>
 </body>
 </html>

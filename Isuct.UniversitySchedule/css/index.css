@@ -1,11 +1,20 @@
-﻿* {
-    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+﻿/*
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); */
+/* make transparent link selection, adjust last value opacity 0 to 1.0 *//*
+
 }
 
 body,html {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    -webkit-touch-callout: none;                */
+/* prevent callout to copy image, etc when tap to hold *//*
+
+    -webkit-text-size-adjust: none;             */
+/* prevent webkit from resizing text to fit *//*
+
+    -webkit-user-select: none;                  */
+/* prevent copy paste, to allow, change 'none' to 'text' *//*
+
     
     
     -ms-overflow-style: none;
@@ -19,13 +28,17 @@ body,html {
     margin: 0px;
     padding: 0px;
     width: 100%;
+*/
 /*
         text-transform:uppercase;
-*/
+*//*
+
 }
 
 body{
-    /*padding-top: 60px;*/
+    */
+/*padding-top: 60px;*//*
+
     padding-top: 150px;
     padding-bottom: 70px;
     
@@ -105,9 +118,10 @@ body{
     border-width: 1px;
 }
 
-/* static panels */
+*/
+/* static panels *//*
+
 .topPanel {
-   position: fixed;
    padding-right: 73px;
    width: 100%;
    height:70px;
@@ -125,7 +139,7 @@ body{
 .menuButton {
     position: absolute;
     width: 70px;
-    height:100%;
+    height: 70px;
     right: 0px;
     top: 0px;
 }
@@ -162,4 +176,34 @@ body{
     right: 0px;
     width: 70px;
     height: 100%;
+}*/
+
+body,html {
+    -webkit-touch-callout: none;
+
+    -ms-overflow-style: none;
+    -ms-content-zooming: none;
+
+    font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+.day{
+    width: 100%;
+    text-align: center;
+}
+
+.day >* {
+    margin-top: 10px
+}
+
+.scheduleItems {
+    position: fixed;
+    top: 150px;
+    bottom: 60px;
+    overflow: auto;
+    width:100%;
 }
