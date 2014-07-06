@@ -26,9 +26,9 @@ body,html {
 
 body{
     /*padding-top: 60px;*/
-    padding-top: 150px;
-    padding-bottom: 70px;
-    
+    padding-top: 121px;
+    padding-bottom: 72px;
+    background-color: #000000;
 }
 
 .appName {
@@ -36,17 +36,14 @@ body{
     text-align: center;
 }
 
-.day{
+.daysPanel {
     position:fixed;
-    top: 70px;
+    top: 80px;
     left: 0px;
     width: 100%;
     text-align: center;
-    color: #ffffff;
-    background-color: gray;
-}
-.day >* {
-    margin-top: 10px
+
+    background-color: #dddddd;
 }
 
 .schedule {
@@ -56,9 +53,7 @@ body{
     width: 100%;
     padding-left: 20px;
     padding-right: 20px;
-
-    border-color: gray;
-    border-style: solid;
+    background-color: #dddddd;
 }
 
 .leftPanel {
@@ -67,7 +62,7 @@ body{
     left: 0px;
     height: 100%;
     width: 20px;
-    background-color: gray;
+
 }
 
 .rightPanel {
@@ -76,7 +71,7 @@ body{
     right: 0px;
     height: 100%;
     width: 20px;
-    background-color: gray;
+
 }
 
 .scheduleItems {
@@ -110,7 +105,8 @@ body{
    position: fixed;
    width: 100%;
    top:0;
-   background-color: #808080;
+   height: 79px;
+   background-color: cornflowerblue;
 }
 
 .title {
@@ -124,16 +120,17 @@ body{
 .group {
     margin-top: 2px;
     width: 100%;
-    height:50px;
+    height: 48px;
 }
 
 .bottomPanel {
     bottom: 0;
     position: fixed;
     width: 100%;
-    height:70px;
+    height:72px;
+    background-color: #dddddd;
 }
 
 .bottomButton {
-    height: 100%;
+    height: 70px;
 }
