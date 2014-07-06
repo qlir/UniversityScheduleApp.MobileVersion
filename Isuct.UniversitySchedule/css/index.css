@@ -108,58 +108,32 @@ body{
 /* static panels */
 .topPanel {
    position: fixed;
-   padding-right: 73px;
    width: 100%;
-   height:70px;
    top:0;
-   background-color: cornflowerblue;
-   border-style: solid ;
-   border-color: cornflowerblue ;
+   background-color: #808080;
+}
+
+.title {
+    text-align: center;
+    font-stretch: condensed;
+    font-size: 14pt;
+    color: #ffffff;
+    background-color: cornflowerblue;
 }
 
 .group {
+    margin-top: 2px;
     width: 100%;
-    height:100%;
+    height:50px;
 }
-
-.menuButton {
-    position: absolute;
-    width: 70px;
-    height:100%;
-    right: 0px;
-    top: 0px;
-}
-
 
 .bottomPanel {
     bottom: 0;
     position: fixed;
     width: 100%;
     height:70px;
-    padding-left: 73px;
-    padding-right: 73px;
-    background-color: cornflowerblue;
-    border-style: solid ;
-    border-color: cornflowerblue ;
 }
 
-.leftBottomButton {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    width: 70px;
-    height: 100%;
-}
-
-.centerBottomButton {
-    width: 100%;
-    height: 100%;
-}
-
-.rightBottomButton {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    width: 70px;
+.bottomButton {
     height: 100%;
 }
