@@ -196,14 +196,47 @@ body,html {
     text-align: center;
 }
 
-.day >* {
-    margin-top: 10px
-}
-
 .scheduleItems {
     position: fixed;
-    top: 150px;
+    top: 90px;
     bottom: 60px;
     overflow: auto;
-    width:100%;
+    width: 100%;
+}
+
+.time {
+    margin-left:-10px !important;
+    margin-top:-5px !important;
+}
+
+.lessonName {
+    white-space: normal !important;
+}
+
+.description {
+    text-indent: 20px;
+    border-top-style:solid;
+    border-width: 1px;
+}
+
+.group {
+
+}
+
+@media screen and (orientation: portrait) {
+@-ms-viewport {
+       width: 320px;
+       user-zoom: fixed;
+       max-zoom: 1;
+       min-zoom: 1;
+    }
+    }
+
+@media screen and (orientation: landscape) {
+@-ms-viewport {
+    width: 480px;
+       user-zoom: fixed;
+       max-zoom: 1;
+       min-zoom: 1;
+    }
 }

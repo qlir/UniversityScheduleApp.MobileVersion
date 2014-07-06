@@ -1,84 +1,111 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <meta charset="utf-8"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"/>
     <meta http-equiv="x-ua-compatible" content="IE=edge">
 
     <title>BlankCordovaApp1</title>
 
-    <link href="css/index.css" rel="stylesheet" />
+    <link href="css/index.css" rel="stylesheet"/>
     <script src="lib/jquery-2.1.1.js"></script>
     <script src="lib/angular.js"></script>
     <!--<script src="lib/jquery-1.11.1.js"></script>-->
-    <link rel="stylesheet" href="lib/jquery.mobile-1.4.3.css" />
+    <link rel="stylesheet" href="lib/jquery.mobile-1.4.3.css"/>
     <script src="lib/jquery.mobile-1.4.3.min.js"></script>
 </head>
 <body>
-<div data-role="header" data-position="fixed" >
-    <h1>Рассписание ИГХТУ</h1>
-    <a href="#" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Меню</a>
+<div class="group" >
+    <select data-native-menu="false" data-mini="true"  >
+        <option value="1">Группа 4/42</option>
+        <option value="2">4/42 byajhvfwbjyyst cbcntvs b nt[yjkjubb</option>
+        <option value="3">The 3rd Optiono</option>
+        <option value="4">The 4th Option</option>
+        <option value="5">The 2nd Option</option>
+        <option value="6">The 3rd Option</option>
+        <option value="7">The 4th Option</option>
+        <option value="8">The 2nd Option</option>
+        <option value="9">The 3rd Option</option>
+        <option value="10">The 4th Option</option>
+        <option value="11">The 2nd Option</option>
+        <option value="12">The 3rd Option</option>
+        <option value="13">The 4th Option</option>
+        <option value="14">The 2nd Option</option>
+        <option value="15">The 3rd Option</option>
+        <option value="16">The 4th Option</option>
+        <option value="17">The 2nd Option</option>
+    </select>
 </div>
-<select data-native-menu="false" data-position="fixed" data-mini="true">
-    <option value="1">Группа 4/42</option>
-    <option value="2">The 2nd Option</option>
-    <option value="3">The 3rd Option</option>
-    <option value="4">The 4th Option</option>
-</select>
-    <div class="schedule">
-            <div class="day">
-                <div>1 июня</div>
-                <div>ЧТ I-неделя</div>
-            </div>
-            <div class="scheduleItems">
-                <a  class="item">
-                    <h4 class="time ">8:00 - 9:35</h4>
-                    <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
-                    <div class="description">
+<div class="schedule">
+
+    <div class="day">
+        <div>1 июня</div>
+        <div>ЧТ I-неделя</div>
+    </div>
+    <div class="scheduleItems">
+        <ul data-role="listview" data-split-icon="gear" data-inset="true">
+            <li>
+                <a class="item">
+                    <h3 class="time ">8:00 - 9:35</h3>
+                    <h1 class="lessonName">Безопасность Жизнедеятельности ддддддд</h1>
+
+                    <p class="description">
                         пр.з., A30, Профессор
-                    </div>
+                    </p>
                 </a>
-                <a  class="item">
-                    <h4 class="time">8:00 - 9:35</h4>
-                    <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
-                    <div class="description">пр.з., A300, Профессор
-                    </div>
-                </a>
-                <a  class="item ">
-                    <h4 class="time">8:00 - 9:35</h4>
-                    <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
-                    <div class="description">пр.з., A300, Профессор
-                    </div>
-                </a>
-                <a  class="item">
-                    <h4 class="time">8:00 - 9:35</h4>
-                    <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
-                    <div class="description">пр.з., A300, Профессор
-                    </div>
-                </a>
-            </div>
-            <div class="leftPanel">
+                <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+            </li>
+            <li>
+                <a class="item">
+                    <h3 class="time ">8:00 - 9:35</h3>
+                    <h1 class="lessonName">Безопасность Жизнедеятельности ддддддд</h1>
 
-            </div>
+                    <p class="description">
+                        пр.з., A30, Профессор
+                    </p>
+                </a>
+                <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+            </li>
+            <li>
+                <a class="item">
+                    <h3 class="time ">8:00 - 9:35</h3>
+                    <h1 class="lessonName">Безопасность Жизнедеятельности ддддддд</h1>
 
-            <div class="rightPanel">
+                    <p class="description">
+                        пр.з., A30, Профессор
+                    </p>
+                </a>
+                <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+            </li>
+            <li>
+                <a class="item">
+                    <h3 class="time ">8:00 - 9:35</h3>
+                    <h1 class="lessonName">Безопасность Жизнедеятельности ддддддд</h1>
 
-            </div>
-        </div>
-<div data-role="footer" data-position="fixed" class="nav-glyphish-example" data-theme="b">
-    <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
-        <ul>
-            <li><a href="#" id="chat" data-icon="custom">Chat</a></li>
-            <li><a href="#" id="email" data-icon="custom">Email</a></li>
-            <li><a href="#" id="skull" data-icon="custom">Danger</a></li>
-            <li><a href="#" id="beer" data-icon="custom">Beer</a></li>
-            <li><a href="#" id="coffee" data-icon="custom">Coffee</a></li>
+                    <p class="description">
+                        пр.з., A30, Профессор
+                    </p>
+                </a>
+                <a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+            </li>
         </ul>
     </div>
 </div>
+<div data-role="footer" data-position="fixed" >
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#" data-icon="carat-l"></a></li>
+            <li><a href="#" data-icon="calendar"></a></li>
+            <li><a href="#" data-icon="clock"></a></li>
+            <li><a href="#" data-icon="gear"></a></li>
+            <li><a href="#" data-icon="carat-r"></a></li>
+        </ul>
+    </div><!-- /navbar -->
+</div><!-- /footer -->
 
-        <script src="cordova.js"></script>
-        <script src="scripts/index.js"></script>
+<script src="cordova.js"></script>
+<script src="scripts/index.js"></script>
 </body>
 </html>
