@@ -1,0 +1,14 @@
+D:\cordova\UniversityScheduleApp\UniversityScheduleApp\platforms\wp8\Bin\Debug\ApplicationIcon.png
+D:\cordova\UniversityScheduleApp\UniversityScheduleApp\platforms\wp8\Bin\Debug\Background.png
+D:\cordova\UniversityScheduleApp\UniversityScheduleApp\platforms\wp8\Bin\Debug\isuct.UniversityScheduleApp.dll
+D:\cordova\UniversityScheduleApp\UniversityScheduleApp\platforms\wp8\Bin\Debug\isuct.UniversityScheduleApp.pdb
+D:\cordova\UniversityScheduleApp\UniversityScheduleApp\platforms\wp8\Bin\Debug\AppManifest.xaml
+D:\cordova\UniversityScheduleApp\UniversityScheduleApp\platforms\wp8\Bin\Debug\Properties\WMAppManifest.xml
+D:\cordova\UniversityScheduleApp\UniversityScheduleApp\platforms\wp8\Bin\Debug\CordovaAppProj_Debug_AnyCPU.xap
+D:\cordova\UniversityScheduleApp\UniversityScheduleApp\platforms\wp8\obj\Debug\App.g.cs
+D:\cordova\UniversityScheduleApp\UniversityScheduleApp\platforms\wp8\obj\Debug\cordovalib\CordovaView.g.cs
+D:\cordova\UniversityScheduleApp\UniversityScheduleApp\platforms\wp8\obj\Debug\MainPage.g.cs
+D:\cordova\UniversityScheduleApp\UniversityScheduleApp\platforms\wp8\obj\Debug\isuct.UniversityScheduleApp.g.resources
+D:\cordova\UniversityScheduleApp\UniversityScheduleApp\platforms\wp8\obj\Debug\isuct.UniversityScheduleApp.dll
+D:\cordova\UniversityScheduleApp\UniversityScheduleApp\platforms\wp8\obj\Debug\isuct.UniversityScheduleApp.pdb
+D:\cordova\UniversityScheduleApp\UniversityScheduleApp\platforms\wp8\obj\Debug\XapCacheFile.xml
