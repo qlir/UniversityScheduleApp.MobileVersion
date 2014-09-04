@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="myapp">
 <head>
     <meta charset="utf-8" />
     <meta name="msapplication-tap-highlight" content="no" />
@@ -12,12 +12,17 @@
     <link rel="stylesheet" href="lib/bootstrap-3.2.0/css/bootstrap-theme.min.css">
 
     <link href="css/index.css" rel="stylesheet" />
+    <script src="lib/angular.js"></script>
     <script src="lib/jquery-2.1.1.js"></script>
     <script src="lib//bootstrap-3.2.0/js/bootstrap.min.js"></script>
-    
+
+    <script src="scripts/ScheduleController.js"></script>
+    <script src="scripts/ResponseController.js"></script>
+    <script src="scripts/StorageController.js"></script>
+    <script src="scripts/appController.js"></script>
     <!--<script src="lib/jquery-1.11.1.js"></script>-->
 </head>
-<body>
+<body ng-controller="angularCtrl" >
     <!--<h1 class="appName headerAppColor">Рассписание ИГХТУ</h1>-->
     <!-- Split button -->
     

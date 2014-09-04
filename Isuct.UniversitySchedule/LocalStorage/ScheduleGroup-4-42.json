@@ -1,6 +1,8 @@
 {
-    "GroupID": "4/42",
-    "GroupName": "Информационные системы и технологии",
+    "id": "ScheduleGroup-4-42",
+    "year": "4",
+    "groupNumber": "42",
+    "name": "Информационные системы и технологии",
     "Schedule": [
         {
             "dates": [

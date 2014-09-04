@@ -1,10 +1,29 @@
-function ScheduleController() {
-    this.Schedule;
+function ScheduleController(onready) {
 
-    this.getScheduleByData = function(data) {};
+    var self = this,
+        schedule;
 
-    this.loadScheduleForGroup = function(groupId) {};
+    this.getTextForDisplay = function () {
+        return schedule.year + "/" + schedule.groupNumber + " " + schedule.name;
+    };
 
-    this.loadLastSchedule = function() {};
+    this.getScheduleByDate = function (date) {
+    };
 
+    this.loadScheduleForGroup = function (groupId) {
+    };
+
+    this.loadLastSchedule = function () {
+    };
+
+    var init = function (onready) {
+            StorageController.LoadLastSchedule(
+                function (result) {
+                    schedule = result;
+                    onready();
+                }
+            );
+        };
+
+    init(onready);
 }

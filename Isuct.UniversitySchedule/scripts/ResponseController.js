@@ -6,10 +6,26 @@
  * To change this template use File | Settings | File Templates.
  */
 ResponseController = {
-    getGroupsList : function(onsuccess, onerror) {
+    groupListUrl: "server/GroupList.json",
+    scheduleStorageUrl: "server/",
+
+    downloadGroupsList: function (onsuccess, onerror) {
+        $.get(groupListUrl,function (response) {
+            onsuccess(response);
+        }).fail(function (e) {
+                onerror(e);
+            });
     },
 
-    getScheduleByGroup : function(idGroup, onsuccess, onerror) {
+    downloadScheduleByGroupId: function (idGroup, onsuccess, onerror) {
+        $.get(this.generateUrlByGroupId(idGroup),function (response) {
+            onsuccess(response);
+        }).fail(function (e) {
+                onerror(e);
+            });
+    },
 
+    generateUrlByGroupId: function(idGroup) {
+        return scheduleStorageUrld + idGroup;
     }
 }
