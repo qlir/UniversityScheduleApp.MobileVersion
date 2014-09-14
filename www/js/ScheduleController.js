@@ -12,39 +12,34 @@ function ScheduleController() {
         return schedule.year + "/" + schedule.groupNumber + " " + schedule.name;
     };
 
-    this.getCurrentGroupId = function (onSuccess) {
+    this.getCurrentGroup = function (onsuccess) {
         if(currentGroup)
         {
-            onSuccess(this.currentGroup);
+            onsuccess(this.currentGroup);
             return;
         }
 
-        this.getLastGroupId(function (groupId) {
-            currentGroup = groupId;
-            onSuccess(groupId);
+        storageController.getLastGroup(function (group) {
+            currentGroup = group;
+            onsuccess(group);
         });
     };
 
-    this.getScheduleByDate = function (date, onSuccess, onError) {
+    this.getScheduleByDate = function (date, onsuccess, onerror) {
         storageController.getScheduleOfGroupByDay(currentGroup, date, function (schedule) {
-            onSuccess(schedule);
+            onsuccess(schedule);
         });
     };
 
-    this.loadScheduleForGroup = function (groupId) {
-    };
-
-    this.loadLastSchedule = function () {
-    };
-    this.getGroupsList = function(onSuccess, onError) {
+    this.getGroupsList = function(onsuccess, onerror) {
         storageController.getGroupsList( function (groups) {
             if (groups) {
-                onSuccess(groups);
+                onsuccess(groups);
                 return;
             }
 
             responseController.getGroupsList( function(groups) {
-                onSuccess(groups)
+                onsuccess(groups)
             });
 
         });

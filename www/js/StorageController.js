@@ -13,7 +13,7 @@ function StorageController() {
             {
                 "id": "ScheduleGroup-4-42",
                 "level": "4",
-                "group": "42",
+                "number": "42",
                 "name": "Информационные системы и технологии"
             },
             {
@@ -85,7 +85,12 @@ function StorageController() {
         );
     };
 
-    this.getLastGroupId = function (onsuccess, onerror) {
-        onsuccess("ScheduleGroup-4-42");
+    this.getLastGroup = function (onsuccess, onerror) {
+        onsuccess({
+            "id": "4/42-2014",
+            "level": "4",
+            "number": "42",
+            "name": "Информационные системы и технологии"
+        });
     };
 }

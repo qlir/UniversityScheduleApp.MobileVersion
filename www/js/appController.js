@@ -4,6 +4,9 @@ function AppController($scope) {
 
         init = function () {
             scheduleCtrl = new ScheduleController();
+            scheduleCtrl.getCurrentGroup(function(currentGroup){
+                scope.currentGroup = currentGroup;
+            });
         },
 
         displaySchedule = function() {
@@ -20,6 +23,7 @@ function AppController($scope) {
                 scope.groupList = groups;
             });
         }
+
     init();
 
     displaySchedule();

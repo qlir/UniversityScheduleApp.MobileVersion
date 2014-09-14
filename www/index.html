@@ -70,8 +70,9 @@
    
     <div class="topPanel">
         <div class="title" >Рассписание ИГХТУ</div>
-        <button class="group btn btn-primary btn-lg" type="button" data-toggle="modal" data-target=".bs-example-modal-lg" >Группа 4/42 <span class="caret"></span></button>
+        <button class="group btn btn-primary btn-lg" type="button" data-toggle="modal" data-target=".bs-example-modal-lg" >Группа: {{currentGroup.level}}/{{currentGroup.number}}<span class="caret"></span></button>
     </div>
+
     <div class="bottomPanel btn-group btn-group-justified">
         <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
         <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
@@ -88,7 +89,7 @@
                         Cras justo odio
                     </a>
                     -->
-                    <a href="#" class="list-group-item" ng-repeat="g in groupList">{{g.level}}/{{g.group}} {{g.name}}</a>
+                    <a href="#" class="list-group-item" ng-repeat="g in groupList">{{g.level}}/{{g.number}} {{g.name}}</a>
                 </div>
             </div>
         </div>
