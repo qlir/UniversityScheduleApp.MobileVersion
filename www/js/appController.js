@@ -29,4 +29,8 @@ function AppController($scope) {
     displaySchedule();
     loadGroupList();
 
+    scope.selectGroup = function(group) {
+        scope.currentGroup = group;
+        scheduleCtrl.setCurrentGroup(group);
+    };
 }

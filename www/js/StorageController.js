@@ -26,7 +26,9 @@ function StorageController() {
             },
             {
                 "id": "4/12521",
-                "name": "12521Информационные системы и технологии"
+                "name": "12521Информационные системы и технологии",
+                "number":"22",
+                "level":"2"
             },
             {
                 "id": "4/123515",
@@ -92,5 +94,10 @@ function StorageController() {
             "number": "42",
             "name": "Информационные системы и технологии"
         });
+    };
+
+    this.saveLastGroup = function (group) {
+        console.log('group saved:');
+        console.log(group);
     };
 }

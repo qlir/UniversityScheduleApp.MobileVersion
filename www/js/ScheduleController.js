@@ -31,7 +31,7 @@ function ScheduleController() {
         });
     };
 
-    this.getGroupsList = function(onsuccess, onerror) {
+    this.getGroupsList = function (onsuccess, onerror) {
         storageController.getGroupsList( function (groups) {
             if (groups) {
                 onsuccess(groups);
@@ -44,6 +44,11 @@ function ScheduleController() {
 
         });
     }
+
+    this.setCurrentGroup = function (group) {
+        currentGroup = group;
+        storageController.saveLastGroup(group);
+    };
 
     var init = function () {
         storageController = new StorageController();
