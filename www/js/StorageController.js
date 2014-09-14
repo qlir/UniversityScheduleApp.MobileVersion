@@ -1,38 +1,91 @@
-(function () {
-    function StorageController() {
-        var self = this,
-            groupListUrl = "LocalStorage/GroupList.json",
-            scheduleStorageUrl = "LocalStorage/",
+function StorageController() {
+    var groupListUrl = "LocalStorage/GroupList.json",
+        scheduleStorageUrl = "LocalStorage/";
 
-            getGroupsList = function (onsuccess, onerror) {
+    this.getGroupsList = function (onsuccess, onerror) {
+        /*$.get(groupListUrl,function (response) {
+            onsuccess(response);
+        }).fail(function (e) {
+                onerror(e);
+            });*/
+        onsuccess(
+            [
+            {
+                "id": "ScheduleGroup-4-42",
+                "level": "4",
+                "group": "42",
+                "name": "Информационные системы и технологии"
             },
-
-            getScheduleByGroupId = function (idGroup, onsuccess, onerror) {
-                $.get(generateUrlByGroupId(idGroup),function (response) {
-                    onsuccess(response);
-                }).fail(function (e) {
-                        onerror(e);
-                    });
+            {
+                "id": "4/12351",
+                "name": "12351 Информационные системы и технологии"
             },
-
-            saveSchedule = function (schedule) {
-
+            {
+                "id": "4/1352351",
+                "name": "1352351Информационные системы и технологии"
             },
-
-            getLastGroupId = function (onsuccess, onerror) {
-                onsuccess("ScheduleGroup-4-42");
+            {
+                "id": "4/12521",
+                "name": "12521Информационные системы и технологии"
             },
+            {
+                "id": "4/123515",
+                "name": "Информационные системы и технологии"
+            },
+            {
+                "id": "4/123511",
+                "name": "123511Информационные системы и технологии"
+            },
+            {
+                "id": "4/2315",
+                "name": "2315Информационные системы и технологии"
+            },
+            {
+                "id": "4/156234",
+                "name": "156234Информационные системы и технологии"
+            }
+            ]
+        );
+    };
 
-            generateUrlByGroupId = function (idGroup) {
-                return scheduleStorageUrl + idGroup + ".json";
-            };
+    this.getScheduleOfGroupByDay = function (idGroup, date, onsuccess, onerror) {
+        /*$.get(this.generateUrlByGroupId(idGroup),function (response) {
+         onsuccess(response);
+         }).fail(function (e) {
+         onerror(e);
+         });
+         */
+        onsuccess(
+            [
+                {
+                    "startTime": "8:00",
+                    "endTime": "9:35",
+                    "room": "A300",
+                    "name": "БЖД",
+                    "professor": null,
+                    "type": "пр.з."
+                },
+                {
+                    "startTime": "9:50",
+                    "endTime": "11:25",
+                    "room": "Г203",
+                    "name": "Основы массопередачи",
+                    "professor": "проф. Липин А.Г.",
+                    "type": "лекция"
+                },
+                {
+                    "startTime": "11:40",
+                    "endTime": "13:15",
+                    "room": null,
+                    "name": "БЖД",
+                    "professor": null,
+                    "type": "лаб"
+                }
+            ]
+        );
+    };
 
-        this.LoadLastSchedule = function (onsuccess, onerror) {
-            getLastGroupId(function (lastGroupId) {
-                getScheduleByGroupId(lastGroupId, onsuccess, onerror)
-            });
-        }
-    }
-
-    window.StorageController = new StorageController();
-})();
+    this.getLastGroupId = function (onsuccess, onerror) {
+        onsuccess("ScheduleGroup-4-42");
+    };
+}

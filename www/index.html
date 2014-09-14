@@ -14,12 +14,12 @@
     <link href="css/index.css" rel="stylesheet" />
     <script src="lib/angular.js"></script>
     <script src="lib/jquery-2.1.1.js"></script>
-    <script src="lib//bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script src="lib/bootstrap-3.2.0/js/bootstrap.min.js"></script>
 
-    <script src="scripts/ScheduleController.js"></script>
-    <script src="scripts/ResponseController.js"></script>
-    <script src="scripts/StorageController.js"></script>
-    <script src="scripts/appController.js"></script>
+    <script src="js/ResponseController.js"></script>
+    <script src="js/StorageController.js"></script>
+    <script src="js/ScheduleController.js"></script>
+    <script src="js/appController.js"></script>
     <!--<script src="lib/jquery-1.11.1.js"></script>-->
 </head>
 <body ng-controller="angularCtrl" >
@@ -30,8 +30,8 @@
         <div class="schedule">
             <div class="daysPanel">
                 <div class="day">
-                    <div>1 июня</div>
-                    <div>ЧТ I-неделя</div>
+                    <div>{{scheduleDate}}</div>
+                    <div>{{scheduleDay}}</div>
                 </div>
             </div>
             <!--<div class="days">
@@ -50,30 +50,10 @@
             </div>-->
             <div class="scheduleItems container">
                 <div class="list-group">
-                    <a  class="item list-group-item list-group-item-success">
-                        <h4 class="time ">8:00 - 9:35</h4>
-                        <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
-                        <div class="description">
-                            пр.з., A300, Профессор
-                        </div>                    
-                    </a>
-                    <a  class="item list-group-item list-group-item-info">
-                        <h4 class="time list-group-item-heading">8:00 - 9:35</h4>
-                        <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
-                        <div class="description">пр.з., A300, Профессор
-                        </div>
-                    </a>
-                    <a  class="item list-group-item list-group-item-warning">
-                        <h4 class="time list-group-item-heading">8:00 - 9:35</h4>
-                        <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
-                        <div class="description">пр.з., A300, Профессор
-                        </div>
-                    </a>
-                    <a  class="item list-group-item">
-                        <h4 class="time list-group-item-heading">8:00 - 9:35</h4>
-                        <h4 class="lessonName">Безопасность Жизнедеятельности ддддддд</h4>
-                        <div class="description">пр.з., A300, Профессор
-                        </div>
+                    <a  class="item list-group-item list-group-item-success" ng-repeat="les in schedule" >
+                        <h4 class="time ">{{les.startTime}}-{{les.endTime}}</h4>
+                        <h4 class="lessonName">{{les.name}}</h4>
+                        <div class="description">{{les.type}}, {{les.room}}, {{les.professor}}</div>
                     </a>
                 </div>
             </div>
@@ -88,7 +68,7 @@
    
     <div class="topPanel">
         <div class="title" >Рассписание ИГХТУ</div>
-        <button type="button" class="group btn btn-primary btn-lg">Группа 4/42 <span class="caret"></span></button>
+        <button class="group btn btn-primary btn-lg" type="button" data-toggle="modal" data-target=".bs-example-modal-lg" >Группа 4/42 <span class="caret"></span></button>
     </div>
     <div class="bottomPanel btn-group btn-group-justified">
         <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
@@ -97,8 +77,22 @@
         <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
         <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
     </div>
-        <script src="cordova.js"></script>
 
-        <script src="scripts/index.js"></script>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="list-group">
+                    <!--<a href="#" class="list-group-item active">
+                        Cras justo odio
+                    </a>
+                    -->
+                    <a href="#" class="list-group-item" ng-repeat="g in groupList">{{g.level}}/{{g.group}} {{g.name}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>

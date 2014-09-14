@@ -1,13 +1,34 @@
-function ScheduleController(onready) {
+function ScheduleController() {
+    var schedule,
+        storageController,
+        responseController,
+        currentGroup,
 
-    var self = this,
-        schedule;
+        convertDateToString = function (date) {
+            return date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
+        };
 
     this.getTextForDisplay = function () {
         return schedule.year + "/" + schedule.groupNumber + " " + schedule.name;
     };
 
-    this.getScheduleByDate = function (date) {
+    this.getCurrentGroupId = function (onSuccess) {
+        if(currentGroup)
+        {
+            onSuccess(this.currentGroup);
+            return;
+        }
+
+        this.getLastGroupId(function (groupId) {
+            currentGroup = groupId;
+            onSuccess(groupId);
+        });
+    };
+
+    this.getScheduleByDate = function (date, onSuccess, onError) {
+        storageController.getScheduleOfGroupByDay(currentGroup, date, function (schedule) {
+            onSuccess(schedule);
+        });
     };
 
     this.loadScheduleForGroup = function (groupId) {
@@ -15,15 +36,24 @@ function ScheduleController(onready) {
 
     this.loadLastSchedule = function () {
     };
+    this.getGroupsList = function(onSuccess, onError) {
+        storageController.getGroupsList( function (groups) {
+            if (groups) {
+                onSuccess(groups);
+                return;
+            }
 
-    var init = function (onready) {
-            StorageController.LoadLastSchedule(
-                function (result) {
-                    schedule = result;
-                    onready();
-                }
-            );
-        };
+            responseController.getGroupsList( function(groups) {
+                onSuccess(groups)
+            });
 
-    init(onready);
+        });
+    }
+
+    var init = function () {
+        storageController = new StorageController();
+        responseController = new ResponseController();
+    };
+
+    init();
 }

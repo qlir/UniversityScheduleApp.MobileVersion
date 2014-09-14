@@ -1,21 +1,28 @@
-function AppController(appName, angularCtrl) {
-    var self = this,
-        scope,
-        storageCtrl,
+function AppController($scope) {
+    var scope = $scope,
         scheduleCtrl,
 
         init = function () {
-            angular.module(appName, []).controller(angularCtrl, function ($scope) {
-                this.scope = $scope;
-            });
-            scheduleCtrl = new ScheduleController(displaySchedule);
+            scheduleCtrl = new ScheduleController();
         },
 
         displaySchedule = function() {
-            //todo
+            var currentDate = new Date();
+            scope.scheduleDate = currentDate.getDate() +" " + months[currentDate.getMonth()];
+            scope.scheduleDay = days[currentDate.getDay()];
+            scheduleCtrl.getScheduleByDate(currentDate, function(schedule) {
+                scope.schedule = schedule;
+            });
+        },
+
+        loadGroupList = function() {
+            scheduleCtrl.getGroupsList(function(groups){
+                scope.groupList = groups;
+            });
         }
-
     init();
-}
 
-AppController("myapp", "angularCtrl");
+    displaySchedule();
+    loadGroupList();
+
+}
