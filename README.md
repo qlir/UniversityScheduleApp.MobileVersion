@@ -1,0 +1,2 @@
+UniversityScheduleApp.MobileVersion
+===================================
