@@ -9,8 +9,11 @@ function AppController($scope) {
             });
         },
 
-        displaySchedule = function() {
-            var currentDate = new Date();
+        displaySchedule = function(day) {
+            if (!day){
+                var currentDate = new Date();
+            }
+
             scope.scheduleDate = currentDate.getDate() +" " + months[currentDate.getMonth()];
             scope.scheduleDay = days[currentDate.getDay()];
             scheduleCtrl.getScheduleByDate(currentDate, function(schedule) {
@@ -32,5 +35,6 @@ function AppController($scope) {
     scope.selectGroup = function(group) {
         scope.currentGroup = group;
         scheduleCtrl.setCurrentGroup(group);
+        displaySchedule();
     };
 }
