@@ -6,7 +6,7 @@
     <!--
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     -->
-    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta http-equiv="x-ru-compatible" content="IE=edge">
 
     <title>BlankCordovaApp1</title>
 
@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="lib/bootstrap-3.2.0/css/bootstrap-theme.min.css">
 
     <link href="css/index.css" rel="stylesheet" />
+
+    <script src="js/log.js"></script>
+    <script src="js/indexedDB.js"></script>
     <script src="lib/angular.js"></script>
     <script src="lib/jquery-2.1.1.js"></script>
     <script src="lib/bootstrap-3.2.0/js/bootstrap.min.js"></script>
@@ -59,18 +62,19 @@
                     </a>
                 </div>
             </div>
-            <div class="leftPanel">
+
+            <div class="leftPanel" ng-click="gotoPreviousDay()">
 
             </div>
 
-            <div class="rightPanel">
+            <div class="rightPanel" ng-click="gotoNextDay()">
 
             </div>
         </div>
    
     <div class="topPanel">
         <div class="title" >Рассписание ИГХТУ</div>
-        <button class="group btn btn-primary btn-lg" type="button" data-toggle="modal" data-target=".bs-example-modal-lg" >Группа: {{currentGroup.level}}/{{currentGroup.number}}<span class="caret"></span></button>
+        <button class="group btn btn-primary btn-lg" type="button" data-toggle="modal" data-target=".bs-example-modal-lg" >Группа: {{currentGroup}}<span class="caret"></span></button>
     </div>
 
     <div class="bottomPanel btn-group btn-group-justified">
@@ -99,7 +103,7 @@
         </div>
     </div>
 
-    <script src="cordova.js"></script>
+    <!--<script src="cordova.js"></script>-->
     <script src="js/index.js"></script>
 </body>
 </html>

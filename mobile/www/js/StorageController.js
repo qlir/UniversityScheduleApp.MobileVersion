@@ -1,98 +1,37 @@
-function StorageController() {
-    var groupListUrl = "LocalStorage/GroupList.json",
-        scheduleStorageUrl = "LocalStorage/";
+function StorageController(ready) {
+    var groupsListStoreName = 'scheduleList',
+        schedulesStoreName = "schedules",
+        dbName = 'db',
+        db;
+
+    db = new Indb(dbName, 1);
+    //db.drop();
+    db.addStore(groupsListStoreName, 'id', {
+        isGroup: null,
+        info: null
+    });
+
+    db.addStore(schedulesStoreName, 'id', {
+        lessons: null
+    });
 
     this.getGroupsList = function (onsuccess, onerror) {
-        /*$.get(groupListUrl,function (response) {
-            onsuccess(response);
-        }).fail(function (e) {
-                onerror(e);
-            });*/
-        onsuccess(
-            [
-            {
-                "id": "ScheduleGroup-4-42",
-                "level": "4",
-                "number": "42",
-                "name": "Информационные системы и технологии"
-            },
-            {
-                "id": "4/12351",
-                "name": "12351 Информационные системы и технологии"
-            },
-            {
-                "id": "4/1352351",
-                "name": "1352351Информационные системы и технологии"
-            },
-            {
-                "id": "4/12521",
-                "name": "12521Информационные системы и технологии",
-                "number":"22",
-                "level":"2"
-            },
-            {
-                "id": "4/123515",
-                "name": "Информационные системы и технологии"
-            },
-            {
-                "id": "4/123511",
-                "name": "123511Информационные системы и технологии"
-            },
-            {
-                "id": "4/2315",
-                "name": "2315Информационные системы и технологии"
-            },
-            {
-                "id": "4/156234",
-                "name": "156234Информационные системы и технологии"
-            }
-            ]
-        );
+        db.getAllItems()
     };
 
-    this.getScheduleOfGroupByDay = function (idGroup, date, onsuccess, onerror) {
-        /*$.get(this.generateUrlByGroupId(idGroup),function (response) {
-         onsuccess(response);
-         }).fail(function (e) {
-         onerror(e);
-         });
-         */
-        onsuccess(
-            [
-                {
-                    "startTime": "8:00",
-                    "endTime": "9:35",
-                    "room": "A300",
-                    "name": "БЖД",
-                    "professor": null,
-                    "type": "пр.з."
-                },
-                {
-                    "startTime": "9:50",
-                    "endTime": "11:25",
-                    "room": "Г203",
-                    "name": "Основы массопередачи",
-                    "professor": "проф. Липин А.Г.",
-                    "type": "лекция"
-                },
-                {
-                    "startTime": "11:40",
-                    "endTime": "13:15",
-                    "room": null,
-                    "name": "БЖД",
-                    "professor": null,
-                    "type": "лаб"
-                }
-            ]
-        );
+    this.getScheduleForGroup = function (idGroup, onsuccess, onerror) {
+        db.getItemByKey(schedulesStoreName,idGroup,onsuccess,onerror);
     };
 
     this.getLastGroup = function (onsuccess, onerror) {
         onsuccess({
             "id": "4/42-2014",
-            "level": "4",
-            "number": "42",
-            "name": "Информационные системы и технологии"
+            "isGroup": true,
+            "info": {
+                "level": "4",
+                "number": "42",
+                "name": "Информационные системы и технологии"
+            }
         });
     };
 
@@ -100,4 +39,253 @@ function StorageController() {
         console.log('group saved:');
         console.log(group);
     };
+
+    db.create(function () {
+        if(ready) ready();
+        /*db.addItemsToStore(groupsListStoreName, [
+            {
+                "id": "4/42-2014",
+                "isGroup": true,
+                "info": {
+                    "level": "4",
+                    "number": "42",
+                    "name": "Информационные системы и технологии"
+                }
+            },
+            {
+                "id": "4/42-2015",
+                "isGroup": true,
+                "info": {
+                    "level": "4",
+                    "number": "43",
+                    "name": "Информационные системы и технологии",
+                    "facultet": "ИИИИ"
+                }
+            },
+            {
+                "id": "prepod-2014",
+                "isGroup": false,
+                "info": {
+                    "firstName": "First",
+                    "lastName": "Last",
+                    "patronymic": "patronymic",
+                    "kafedra": "KKK"
+                }
+            }
+        ]);
+        db.addItemsToStore(schedulesStoreName, [
+            {
+                "id": "4/42-2014",
+                "lessons": [
+                    [
+                        {
+                            "startTime": "8:00",
+                            "endTime": "9:35",
+                            "root": "Г202",
+                            "lessonName": "Основы массопередачи",
+                            "professor": null,
+                            "type": "пр.з."
+                        },
+                        {
+                            "startTime": "9:59",
+                            "endTime": "11:25",
+                            "root": "Г203",
+                            "lessonName": "Основы массопередачи",
+                            "professor": "доц. Головушкин Б.А.",
+                            "type": "лек."
+                        }
+                    ],
+                    [
+                        {
+                            "startTime": "8:00",
+                            "endTime": "9:35",
+                            "room": "A300",
+                            "name": "БЖД",
+                            "professor": null,
+                            "type": "пр.з."
+                        },
+                        {
+                            "startTime": "9:50",
+                            "endTime": "11:25",
+                            "room": "Г203",
+                            "name": "Основы массопередачи",
+                            "professor": "проф. Липин А.Г.",
+                            "type": "лекция"
+                        },
+                        {
+                            "startTime": "11:40",
+                            "endTime": "13:15",
+                            "room": null,
+                            "name": "БЖД",
+                            "professor": null,
+                            "type": "лаб"
+                        }
+                    ],
+                    [
+                        {
+                            "startTime": "8:00",
+                            "endTime": "9:35",
+                            "root": "Г202",
+                            "lessonName": "Основы массопередачи",
+                            "professor": null,
+                            "type": "пр.з."
+                        },
+                        {
+                            "startTime": "9:59",
+                            "endTime": "11:25",
+                            "root": "Г203",
+                            "lessonName": "Основы массопередачи",
+                            "professor": "доц. Головушкин Б.А.",
+                            "type": "лек."
+                        }
+                    ],
+                    [
+                        {
+                            "startTime": "8:00",
+                            "endTime": "9:35",
+                            "room": "A300",
+                            "name": "БЖД",
+                            "professor": null,
+                            "type": "пр.з."
+                        },
+                        {
+                            "startTime": "9:50",
+                            "endTime": "11:25",
+                            "room": "Г203",
+                            "name": "Основы массопередачи",
+                            "professor": "проф. Липин А.Г.",
+                            "type": "лекция"
+                        },
+                        {
+                            "startTime": "11:40",
+                            "endTime": "13:15",
+                            "room": null,
+                            "name": "БЖД",
+                            "professor": null,
+                            "type": "лаб"
+                        }
+                    ]
+                ]
+            },
+            {
+                "id": "4/42-2015",
+                "lessons": [null, [
+                    {
+                        "startTime": "8:00",
+                        "endTime": "9:35",
+                        "room": "A300",
+                        "name": "БЖД",
+                        "professor": null,
+                        "type": "пр.з."
+                    },
+                    {
+                        "startTime": "9:50",
+                        "endTime": "11:25",
+                        "room": "Г203",
+                        "name": "Основы массопередачи",
+                        "professor": "проф. Липин А.Г.",
+                        "type": "лекция"
+                    },
+                    {
+                        "startTime": "11:40",
+                        "endTime": "13:15",
+                        "room": null,
+                        "name": "БЖД",
+                        "professor": null,
+                        "type": "лаб"
+                    }
+                ], [
+                    {
+                        "startTime": "8:00",
+                        "endTime": "9:35",
+                        "room": "A300",
+                        "name": "БЖД",
+                        "professor": null,
+                        "type": "пр.з."
+                    },
+                    {
+                        "startTime": "9:50",
+                        "endTime": "11:25",
+                        "room": "Г203",
+                        "name": "Основы ",
+                        "professor": "проф. Липин А.Г.",
+                        "type": "лекция"
+                    },
+                    {
+                        "startTime": "11:40",
+                        "endTime": "13:15",
+                        "room": null,
+                        "name": "БЖД",
+                        "professor": null,
+                        "type": "лаб"
+                    }
+                ]]
+            },
+            {
+                "id": "prepod-2014",
+                "lessons": [
+                    [
+                        {
+                            "startTime": "8:00",
+                            "endTime": "9:35",
+                            "room": "A300",
+                            "name": "БЖД",
+                            "professor": null,
+                            "type": "пр.з."
+                        },
+                        {
+                            "startTime": "9:50",
+                            "endTime": "11:25",
+                            "room": "Г203",
+                            "name": "Основы массопередачи",
+                            "professor": "проф. Липин А.Г.",
+                            "type": "лекция"
+                        },
+                        {
+                            "startTime": "11:40",
+                            "endTime": "13:15",
+                            "room": null,
+                            "name": "БЖД",
+                            "professor": null,
+                            "type": "лаб"
+                        }
+                    ],
+                    [
+                        {
+                            "startTime": "8:00",
+                            "endTime": "9:35",
+                            "room": "A300",
+                            "name": "БЖД",
+                            "professor": null,
+                            "type": "пр.з."
+                        },
+                        {
+                            "startTime": "9:50",
+                            "endTime": "11:25",
+                            "room": "Г203",
+                            "name": "Основы массопередачи",
+                            "professor": "проф. Липин А.Г.",
+                            "type": "лекция"
+                        },
+                        {
+                            "startTime": "11:40",
+                            "endTime": "13:15",
+                            "room": null,
+                            "name": "суперосновы",
+                            "professor": null,
+                            "type": "лаб"
+                        },
+                        {
+                            "startTime": "13:30",
+                            "endTime": "15:05",
+                            "room": null,
+                            "name": "суперосновы",
+                            "professor": null,
+                            "type": "лаб"
+                        }
+                    ]
+                ]
+            }
+        ])*/
+    });
 }
