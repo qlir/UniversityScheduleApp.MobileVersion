@@ -8,7 +8,7 @@ function AppController($scope) {
                 scheduleCtrl.loadLastSchedule(function (currentGroup) {
                     scope.currentGroup = currentGroup.info.level + "/" + currentGroup.info.number;
                     displaySchedule();
-                    scope.$apply();
+
                 });
             });
         },
@@ -17,7 +17,12 @@ function AppController($scope) {
             if (!day) {
                 var day = new Date();
             }
-            scope.schedule = scheduleCtrl.getScheduleByDate(day);
+            scheduleCtrl.getScheduleByDate(day, function (result) {
+                scope.schedule = result;
+                setTimeout(function () {
+                    scope.$apply();
+                }, 0);
+            }, gErr);
             setCurDay(day);
         },
 
@@ -38,13 +43,13 @@ function AppController($scope) {
             });
         },
 
-        gotoNextDay = function() {
+        gotoNextDay = function () {
             curData.setDate(curData.getDate() + 1);
             setCurDay(curData);
             displaySchedule(curData)
         },
 
-        gotoPreviousDay = function(){
+        gotoPreviousDay = function () {
             curData.setDate(curData.getDate() - 1);
             setCurDay(curData);
             displaySchedule(curData)

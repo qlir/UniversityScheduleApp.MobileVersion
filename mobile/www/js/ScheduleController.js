@@ -1,16 +1,13 @@
 function ScheduleController(ready) {
     var self = this,
-        schedule,
+        schedules = [],
+        schedulesArray,
         storageController,
         responseController,
         currentGroup,
-        getNumberOfScheduleForDate = function (date) {
-            log(schedule);
-            if (schedule.length === 7) {
-                return date.getWeekDay();
-            } else {
-                return ((getWeakNumberForDate(date) % 2) ? 0 : 1 ) * 7 + date.getWeekDay();
-            }
+
+        toStringOnlyDate = function (date) {
+            return date.toISOString().split("T")[0]
         },
         getWeakNumberForDate = function (date) {
             if (!(date instanceof Date)) return null;
@@ -18,23 +15,21 @@ function ScheduleController(ready) {
             var dayNY = newYear.getWeekDay();
             var time = date.getTime() - newYear.getTime();
             var curDayNum = Math.floor(time / 1000 / 60 / 60 / 24) + dayNY;
-            return Math.floor(curDayNum/7);
+            return Math.floor(curDayNum / 7);
         };
+
     this.getTextForDisplay = function () {
         return schedule.year + "/" + schedule.groupNumber + " " + schedule.name;
     };
 
     this.loadScheduleForGroup = function (groupId, onsuccess, onerror) {
-        storageController.getScheduleForGroup(groupId, function (result) {
-            schedule = result.lessons;
-            if (onsuccess) {
-                onsuccess();
-            }
-        }, function (err) {
-            log(err);
-            if (onerror) onerror(err);
-        });
-    }
+        storageController.getSchedulesArrayForGroup(groupId,
+            function (result) {
+                schedulesArray = result;
+                if (onsuccess) onsuccess();
+            },
+            gErr);
+    };
 
     this.getLastGroup = function (onsuccess) {
         if (currentGroup) {
@@ -48,8 +43,25 @@ function ScheduleController(ready) {
         });
     };
 
-    this.getScheduleByDate = function (date) {
-        return schedule[getNumberOfScheduleForDate(date)];
+    this.getScheduleByDate = function (date, onsuccess, onerror) {
+        var scheduleId = schedulesArray[toStringOnlyDate(date)];
+        if (!scheduleId) {
+            onsuccess(null);
+            return;
+        }
+        var schedule = schedules[scheduleId];
+        if (schedule) {
+            onsuccess(schedule);
+            return;
+        }
+
+        storageController.getSchedule(scheduleId,
+            function (result) {
+                schedules[scheduleId] = result;
+                onsuccess(result);
+            },
+            onerror
+        );
     };
 
     this.getGroupsList = function (onsuccess, onerror) {
@@ -74,7 +86,6 @@ function ScheduleController(ready) {
     this.loadLastSchedule = function (onsuccess, onerror) {
         this.getLastGroup(function (group) {
             self.loadScheduleForGroup(group.id, function () {
-                log(schedule)
                 if (onsuccess) {
                     onsuccess(group);
                 }
