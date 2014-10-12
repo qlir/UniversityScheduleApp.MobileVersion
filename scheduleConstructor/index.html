@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<title>Моя верстка </title>
+<head>
+    <script src="lib/jquery-2.1.1.js"></script>
+    <!--можешь не понимать след 3 строчки потом объясню-->
+    <link rel="stylesheet" href="lib/bootstrap-3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap-3.2.0/css/bootstrap-theme.min.css">
+    <script src="lib/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+<body>
+<div class="box">
+    <div class="header">Онлайн-сервис по составлению расписания</div>
+    <div class="aside">
+        <select id="scheduleList" size="1" multiple>
+            <option>Факультет</option>
+            <option>Курс</option>
+            <option>Группа</option>
+            <option>Учебная неделя</option>
+            <option>Расписание</option>
+        </select>
+    </div>
+    <div class="section">
+        <button type="button" class="btn btn-primary btn-lg">а с этим надо разобратся</button>
+        <button type="button" class="btn btn-danger btn-sm">
+            <span class="glyphicon glyphicon-heart"></span> heart
+        </button>
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                Dropdown
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+            </ul>
+        </div>
+        <div class="btn-toolbar">
+            <button class="btn btn-default btn-lg">Middle</button>
+            <button class="btn btn-default btn-lg">right</button>
+            <button class="btn btn-default btn-lg">left</button>
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Username">
+        </div>
+    </div>
+    <div class="footer">
+        Copyright Хватова Елена
+    </div>
+</div>
+</body>
+</html>
