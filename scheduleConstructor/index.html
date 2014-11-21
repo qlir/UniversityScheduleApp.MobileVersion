@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="myapp">
 <title>Моя верстка </title>
 <head>
     <script src="lib/jquery-2.1.1.js"></script>
@@ -8,11 +8,18 @@
     <link rel="stylesheet" href="lib/bootstrap-3.2.0/css/bootstrap-theme.min.css">
     <script src="lib/bootstrap-3.2.0/js/bootstrap.min.js"></script>
 
+
+    <script src="lib/angular.js"></script>
+    <script src="js/dbController.js"></script>
+    <script src="js/appController.js"></script>
+    <script src="js/angularController.js"></script>
+    <script src="js/index.js"></script>
+
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
-<body>
+<body ng-controller="angularCtrl">
 <div class="box">
-    <div class="header">Онлайн-сервис по составлению расписания</div>
+    <div class="header">{{hello}}</div>
     <div class="aside">
         <select id="scheduleList" size="1" multiple>
             <option>Факультет</option>
