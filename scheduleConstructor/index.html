@@ -4,8 +4,14 @@
 <head>
     <script src="lib/jquery-2.1.1.js"></script>
     <!--можешь не понимать след 3 строчки потом объясню-->
-    <link rel="stylesheet" href="lib/bootstrap-3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="lib/bootstrap-3.2.0/css/bootstrap-theme.min.css">
+    <!-- Bootstrap Core CSS -->
+    <link href="lib/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="lib/bootstrap-3.2.0/css/sb-admin.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href="lib/bootstrap-3.2.0/css/plugins/morris.css" rel="stylesheet">
+
+    <!-- Bootstrap Core JavaScript -->
     <script src="lib/bootstrap-3.2.0/js/bootstrap.min.js"></script>
 
 
@@ -19,46 +25,343 @@
 </head>
 <body ng-controller="angularCtrl">
 <div class="box">
-    <div class="header">{{hello}}</div>
-    <div class="aside">
-        <select id="scheduleList" size="1" multiple>
-            <option>Факультет</option>
-            <option>Курс</option>
-            <option>Группа</option>
-            <option>Учебная неделя</option>
-            <option>Расписание</option>
-        </select>
-    </div>
-    <div class="section">
-        <button type="button" class="btn btn-primary btn-lg">а с этим надо разобратся</button>
-        <button type="button" class="btn btn-danger btn-sm">
-            <span class="glyphicon glyphicon-heart"></span> heart
+<div class="header">Онлайн-сервис по составлению расписания</div>
+<div class="aside">
+    <input type="text" id="sear" class="form-control" placeholder="Поиск..."/>
+
+    <div class="dropdown">
+        <button id="sort" class="btn btn-default dropdown-toggle-lg" type="button" id="dropdownMenu1"
+                data-toggle="dropdown">
+            Сортировать по...
+            <span class="caret"></span>
         </button>
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                Dropdown
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                <li role="presentation" class="divider"></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-            </ul>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Курсы</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Факультеты</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Группы</a></li>
+        </ul>
+    </div>
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Item #1
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    Пример 1
+                </div>
+            </div>
         </div>
-        <div class="btn-toolbar">
-            <button class="btn btn-default btn-lg">Middle</button>
-            <button class="btn btn-default btn-lg">right</button>
-            <button class="btn btn-default btn-lg">left</button>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        Item #2
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Пример 2
+                </div>
+            </div>
         </div>
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Username">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                        Item #3
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Пример3
+                </div>
+            </div>
         </div>
     </div>
-    <div class="footer">
-        Copyright Хватова Елена.
+    <button id="create" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Создать расписание
+    </button>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span
+                        aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Введите данные..</h4>
+            </div>
+            <div class="modal-body">
+                <div class="itemContainer">
+                    <h4 class="leftLabel">Курс</h4>
+
+                    <div class="rightDropdown dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2"
+                                data-toggle="dropdown">
+                            1 курс
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1 курс</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">2 курс</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">3 курс</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">4 курс</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">5 курс</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="itemContainer">
+                    <h6 class="leftLabel">Факультет</h6>
+
+                    <div class="rightDropdown dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3"
+                                data-toggle="dropdown">
+                            Выберите Факультет
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ХТиК</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ИУФиС</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="itemContainer">
+                    <h6 class="leftLabel">Группа</h6>
+
+                    <div class="rightDropdown dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu4"
+                                data-toggle="dropdown">
+                            Выберите группу
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1</a></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">2</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="itemContainer">
+                    <h6 class="leftLabel">Специальность</h6>
+
+                    <div class="rightDropdown dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu5"
+                                data-toggle="dropdown">
+                            Выберите специальность
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Информационные системы</a>
+                            </li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Экономика в управлении</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Сохранить</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+            </div>
+        </div>
     </div>
+</div>
+<div class="section">
+    <div class="describes">
+        <h5>Расписание для: Химической техники и кибернетики - 5/42 - Информационные технологии</h5>
+        <h5>На период: с 1.09.2014. по 31.12.2014</h5>
+    </div>
+    <table class="items schedule">
+        <tbody>
+        <tr>
+            <td class="weekDay ">Понедельник</td>
+            <td class="lessons  list-group">
+                <div class="list-group-item">8.00-9.35 Маркетин ИС, Власов А.П., ДК9 , ПЗ.</div>
+                <div class="list-group-item">9.50-11.25 Професс.иностр.язык, д. Костина Е.В, "К" 408, ПЗ.
+                </div>
+                <div class="list-group-item">11.40-13.15 Управление персоналом, ст.пр. Жарницкая Н.Ф., А 104, лек.
+                </div>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+            <td class="lessons  list-group">
+                <div class="list-group-item">8.00-9.35 Техн.-эконом. анализ предприятий, ст.пр. Белоконская Е.Г., А104,
+                    лек.
+                </div>
+                <div class="list-group-item">8.00-9.35 Техн.-эконом. анализ предприятий, ст.пр. Белоконская Е.Г., А17,
+                    ПЗ.
+                </div>
+                <div class="list-group-item">Управление персоналом,ст.пр. Жарницкая Н.Ф., А 17, ПЗ
+                </div>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="weekDay ">Вторник</td>
+            <td class="lessons  list-group">
+                <div class="list-group-item">8.00-9.35 Информ. технологии на предприятии, д. Галиаскаров Э.Г., ДК9, лек.
+                </div>
+                <div class="list-group-item">9.50-11.25 Информ. технологии на предприятии, ДК 13, лаб.
+                </div>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+            <td class="lessons  list-group">
+                <div class="list-group-item">8.00-9.35 Маркетинг информационных услуг,д .Власов А.П.,ДК9, лек.
+                </div>
+                <div class="list-group-item">9.35-11.25 Маркетинг информационных услуг,д .Власов А.П.,ДК13, ПЗ.</div>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="weekDay ">Среда</td>
+            <td class="lessons  list-group">
+                <div class="list-group-item">8.00-9.35 Информ. технологии на предприятии, д. Галиаскаров Э.Г., ДК9,
+                    лек.
+                </div>
+                <div class="list-group-item">9.35-11.25 Маркетинг информационных услуг,д .Власов А.П.,ДК13, ПЗ.</div>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+            <td class="lessons  list-group">
+                <div class="list-group-item">8.00-9.35 Маркетинг информационных услуг,д .Власов А.П.,ДК9, лек.</div>
+                <div class="list-group-item">9.35-11.25 Маркетинг информационных услуг,д .Власов А.П.,ДК13, ПЗ.</div>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="weekDay ">Четверг</td>
+            <td class="lessons  list-group">
+                <div class="list-group-item">8.00-9.35 Маркетинг информационных услуг,д .Власов А.П.,ДК13, ПЗ.</div>
+                <div class="list-group-item">9.50-11.25 Информ. технологии на предприятии, д. Галиаскаров Э.Г., ДК
+                    13,ПЗ.
+                </div>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+            <td class="lessons  list-group">
+                <div class="list-group-item">8.00-9.35 Маркетинг информационных услуг,д .Власов А.П.,ДК9, лек.</div>
+                <div class="list-group-item">9.50-11.25 Информ. технологии на предприятии, д. Галиаскаров Э.Г., ДК
+                    13,ПЗ.
+                </div>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="weekDay ">Пятница</td>
+            <td class="lessons  list-group">
+                <div class="list-group-item">8.00-9.35 Мировые информационные ресурсы, д. Власов А.Г., ДК13, лек.</div>
+                <div class="list-group-item">9.50-11.25 Мировые информационные ресурсы,д. Власов А.Г.,ДК13, лаб.
+                </div>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+            <td class="lessons  list-group">
+                <div class="list-group-item">8.00-9.25 Професс.иностр.язык, д. Костина Е.В, "К" 408, ПЗ.</div>
+                <div class="list-group-item">9.50-11.25 Мировые информационные ресурсы,д. Власов А.Г.,ДК13, лаб.</div>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="weekDay ">Суббота</td>
+            <td class="lessons  list-group">
+                <div class="list-group-item">День самоподготовки</div>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+            <td class="lessons  list-group">
+                <div class="list-group-item">День самоподготовки</div>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="weekDay">Воскресенье</td>
+            <td class="lessons list-group">
+                <div class="list-group-item">Выходной</div>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+            <td class="lessonslist-group">
+                <div class="list-group-item">Выходной</div>
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span
+                            class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel2">Введите данные..</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td class="string">Время</td>
+                            <td class="string">Предмет</td>
+                            <td class="string">Преподаватель</td>
+                            <td class="string">Тип занятия</td>
+                            <td class="string">Аудитория</td>
+                        </tr>
+                        <tr>
+                            <td class="string">
+                                <form class="form-inline" role="form">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="exampleInput"
+                                               placeholder="введите время">
+                                    </div>
+                                </form>
+                            </td>
+                            <td class="string">Предмет</td>
+                            <td class="string">Преподаватель</td>
+                            <td class="string">Тип занятия</td>
+                            <td class="string">Аудитория</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Сохранить</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    Copyright Хватова Елена.
+</div>
 </div>
 </body>
 </html>
