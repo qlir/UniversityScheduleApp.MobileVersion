@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
 <html ng-app="myapp">
 <head>
-    <meta charset="utf-8" />
-    <meta name="msapplication-tap-highlight" content="no" />
+    <meta charset="utf-8"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
     <!--
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     -->
@@ -10,100 +10,101 @@
 
     <title>BlankCordovaApp1</title>
 
-    <link href="lib/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="lib/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="lib/bootstrap-3.2.0/css/bootstrap-theme.min.css">
+    <link href="lib/datepicker/css/datepicker.css" rel="stylesheet"/>
 
-    <link href="css/index.css" rel="stylesheet" />
+    <link href="css/index.css" rel="stylesheet"/>
+
+    <script src="lib/jquery-2.1.1.js"></script>
+    <!--    <script src="lib/jquery-1.11.1.js"></script>-->
+
+    <script src="js/indexedDB.js"></script>
+    <script src="lib/angular.js"></script>
+    <script src="lib/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script src="lib/datepicker/datepicker.js"></script>
+    <script src="lib/IndexedDBShim.min.js"></script>
 
     <script src="js/log.js"></script>
-    <script src="js/indexedDB.js"></script>
-    <script src="../../scheduleConstructor/lib/angular.js"></script>
-    <script src="lib/jquery-2.1.1.js"></script>
-    <script src="lib/bootstrap-3.2.0/js/bootstrap.min.js"></script>
-
-    <script src="js/ResponseController.js"></script>
+    <script src="js/RequestController.js"></script>
     <script src="js/StorageController.js"></script>
     <script src="js/ScheduleController.js"></script>
     <script src="js/appController.js"></script>
-    <!--<script src="lib/jquery-1.11.1.js"></script>-->
+
+    <script src="lib/moment.js"></script>
+    <script src="lib/bootstrap-datetimepicker.js"></script>
+    <!---->
 </head>
-<body ng-controller="angularCtrl" >
-    <!--<h1 class="appName headerAppColor">Рассписание ИГХТУ</h1>-->
-    <!-- Split button -->
-
-        <!--<h1 class="topPanel panel panel-primary"><span>Группа 4/42</span><b class="caret"></b><button class="menuButton btn btn-default btn-lg pull-right ">Menu</button></h1>-->
-        <div class="schedule">
-            <div class="daysPanel">
-                <div class="day">
-                    <div>{{scheduleDate}}</div>
-                    <div>{{scheduleDay}}</div>
-                </div>
-            </div>
-            <!--<div class="days">
-                <div class="day">
-                    <p>1 июня</p>
-                    <p>ЧТ I-неделя</p>
-                </div>
-                <div class="day activeDay">
-                    <p>1 июня</p>
-                    <p>ЧТ I-неделя</p>
-                </div>
-                <div class="day">
-                    <p>1 июня</p>
-                    <p>ЧТ I-неделя</p>
-                </div>
-            </div>-->
-            <div class="scheduleItems container">
-                <div class="list-group">
-                    <a  class="item list-group-item list-group-item-success" ng-repeat="les in schedule" >
-                        <h4 class="time ">{{les.startTime}}-{{les.endTime}}</h4>
-                        <h4 class="lessonName">{{les.name}}</h4>
-                        <div class="description">{{les.type}}, {{les.room}}, {{les.professor}}</div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="leftPanel" ng-click="gotoPreviousDay()">
-
-            </div>
-
-            <div class="rightPanel" ng-click="gotoNextDay()">
-
-            </div>
+<body ng-controller="angularCtrl">
+<!--<h1 class="appName headerAppColor">Рассписание ИГХТУ</h1>-->
+<!-- Split button -->
+<!--<h1 class="topPanel panel panel-primary"><span>Группа 4/42</span><b class="caret"></b><button class="menuButton btn btn-default btn-lg pull-right ">Menu</button></h1>-->
+<div class="schedule">
+    <div class="daysPanel">
+        <div class="day" id='daysPanel'>
+            <div>{{scheduleDate}}</div>
+            <div>{{scheduleDay}}</div>
         </div>
-   
-    <div class="topPanel">
-        <div class="title" >Рассписание ИГХТУ</div>
-        <button class="group btn btn-primary btn-lg" type="button" data-toggle="modal" data-target=".bs-example-modal-lg" >Группа: {{currentGroup}}<span class="caret"></span></button>
     </div>
+    <!--<div class="days">
+        <div class="day">
+            <p>1 июня</p>
+            <p>ЧТ I-неделя</p>
+        </div>
+        <div class="day activeDay">
+            <p>1 июня</p>
+            <p>ЧТ I-неделя</p>
+        </div>
+        <div class="day">
+            <p>1 июня</p>
+            <p>ЧТ I-неделя</p>
+        </div>
+    </div>-->
+    <div class="scheduleItems container">
+        <div class="list-group">
+            <a class="item list-group-item list-group-item-success" ng-repeat="les in schedule">
+                <h4 class="time ">{{les.startTime}}-{{les.endTime}}</h4>
+                <h4 class="lessonName">{{les.name}}</h4>
 
-    <div class="bottomPanel btn-group btn-group-justified">
-        <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
-        <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
-        <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
-        <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
-        <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
+                <div class="description">{{les.type}}, {{les.room}}, {{les.professor}}</div>
+            </a>
+        </div>
     </div>
-
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myLargeModalLabel">Выбор группы</h4>
-                </div>
-                <div class="list-group">
-                    <!--<a href="#" class="list-group-item active">
-                        Cras justo odio
-                    </a>
-                -->
-                    <a href="#" class="list-group-item" ng-repeat="g in groupList" ng-click="selectGroup(g)" data-dismiss="modal">{{g.level}}/{{g.number}} {{g.name}}</a>
-                </div>
+    <div class="leftPanel" ng-click="gotoPreviousDay()"></div>
+    <div class="rightPanel" ng-click="gotoNextDay()"></div>
+</div>
+<div class="topPanel">
+    <div class="title">Рассписание ИГХТУ</div>
+    <button class="group btn btn-primary btn-lg" ng-click="loadGroupsList()" type="button" data-toggle="modal"
+            data-target=".groupsList">{{getGroupTitle(currentGroup)}}<span class="caret"></span></button>
+</div>
+<div class="bottomPanel btn-group btn-group-justified">
+    <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
+    <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
+    <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
+    <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
+    <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
+</div>
+<div class="modal fade groupsList" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myLargeModalLabel">Выбор группы</h4>
+            </div>
+            <div class="list-group">
+                <!--<a href="#" class="list-group-item active">
+                    Cras justo odio
+                </a>
+            -->
+                <a href="#" class="list-group-item" ng-repeat="g in localGroupsList" ng-click="onSelectGroup(g)"
+                   data-dismiss="modal">{{getGroupTitle(g)}}</a>
             </div>
         </div>
     </div>
-
-    <!--<script src="cordova.js"></script>-->
-    <script src="../../scheduleConstructor/js/index.js"></script>
+</div>
+<!--<script src="cordova.js"></script>-->
+<script src="js/index.js"></script>
 </body>
 </html>

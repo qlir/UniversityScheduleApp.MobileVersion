@@ -41,7 +41,6 @@ function Indb(namedb, versiondb) {
 
         request.onupgradeneeded = function (event) {
             db = event.target.result;
-            log(db);
             for (var storeName in stores) {
                 objectStore = db.createObjectStore(storeName, { keyPath: stores[storeName].keyPath });
                 for (var attr in stores[storeName].attributes) {
@@ -92,7 +91,7 @@ function Indb(namedb, versiondb) {
         var cursorRequest = store.openCursor();
 
         cursorRequest.onerror = function (error) {
-            log(error);
+            //log(error);
             if (onerror) {
                 onerror;
             }

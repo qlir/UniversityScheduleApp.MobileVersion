@@ -1,6 +1,6 @@
-function ResponseController() {
-    this.getGroupsList =  function (onsuccess, onerror) {
-        $.get(groupListUrl, function (response) {
+function RequestController() {
+    this.getGroupsList = function (onsuccess, onerror) {
+        $.get(groupListUrl,function (response) {
             onsuccess(response);
         }).fail(function (e) {
                 onerror(e);
@@ -13,5 +13,9 @@ function ResponseController() {
         }).fail(function (e) {
                 onerror(e);
             });
+    };
+
+    this.getGroupsList = function () {
+        log("RequestController.getGroupsList");
     };
 }

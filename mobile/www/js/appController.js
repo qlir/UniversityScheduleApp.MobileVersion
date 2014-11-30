@@ -1,40 +1,58 @@
 function AppController($scope) {
     var scope = $scope,
         scheduleCtrl,
-        curData,
+        curDate,
+
+        apply = function () {
+            setTimeout(function () {
+                scope.$apply();
+            }, 0);
+        },
+
+        datepickerInit = function(){
+            $('#daysPanel').DatePicker({
+                date: curDate,
+                current: curDate,
+                starts: 1,
+                position: 'r',
+                onBeforeShow: function() {
+                    $('#daysPanel').DatePickerSetDate(curDate, true);
+                },
+                onChange: function(formated, dates){
+                    setCurDate(dates);
+                    updateScheduleForCurrentDate();
+                    $('#daysPanel').DatePickerHide();
+                }
+            });
+        },
 
         init = function () {
             scheduleCtrl = new ScheduleController(function () {
                 scheduleCtrl.loadLastSchedule(function (currentGroup) {
-                    scope.currentGroup = currentGroup.info.level + "/" + currentGroup.info.number;
-                    displaySchedule();
-
+                    scope.currentGroup = currentGroup;
+                    updateScheduleForCurrentDate();
                 });
             });
+            setCurDate(new Date());
+            datepickerInit();
         },
 
-        displaySchedule = function (day) {
-            if (!day) {
-                var day = new Date();
-            }
-            scheduleCtrl.getScheduleByDate(day, function (result) {
+        updateScheduleForCurrentDate = function () {
+            scheduleCtrl.getScheduleByDate(getCurDate(), function (result) {
                 scope.schedule = result;
-                setTimeout(function () {
-                    scope.$apply();
-                }, 0);
+                apply();
             }, gErr);
-            setCurDay(day);
         },
 
-        setCurDay = function (date) {
+        setCurDate = function (date) {
             if (!date instanceof Date) throw "Parameter of setCurData is not Date.";
-            curData = date;
+            curDate = date;
             scope.scheduleDate = date.getDate() + " " + months[date.getMonth()];
             scope.scheduleDay = days[date.getDay()];
         },
 
-        getCurDay = function () {
-            return curData;
+        getCurDate = function () {
+            return curDate;
         },
 
         loadGroupList = function () {
@@ -44,24 +62,52 @@ function AppController($scope) {
         },
 
         gotoNextDay = function () {
-            curData.setDate(curData.getDate() + 1);
-            setCurDay(curData);
-            displaySchedule(curData)
+            curDate.setDate(curDate.getDate() + 1);
+            setCurDate(curDate);
+            updateScheduleForCurrentDate()
         },
 
         gotoPreviousDay = function () {
-            curData.setDate(curData.getDate() - 1);
-            setCurDay(curData);
-            displaySchedule(curData)
+            curDate.setDate(curDate.getDate() - 1);
+            setCurDate(curDate);
+            updateScheduleForCurrentDate()
         }
 
 
     init();
 
-    scope.selectGroup = function (group) {
+    scope.loadGroupsList = function () {
+        scheduleCtrl.getLocalGroupsList(
+            function (result) {
+                scope.localGroupsList = result;
+                apply();
+            },
+            gErr
+        );
+        scheduleCtrl.getInternetGroupsList(
+            function (result) {
+                scope.internetGroupsList = result;
+                apply();
+            },
+            gErr
+        );
+    };
+
+    scope.onSelectGroup = function (group) {
         scope.currentGroup = group;
-        scheduleCtrl.setCurrentGroup(group);
-        displaySchedule();
+        scheduleCtrl.changeGroup(group,function(){
+            updateScheduleForCurrentDate();
+        },gErr);
+    };
+
+    scope.getGroupTitle = function (group) {
+        if(!group) return;
+        switch (group.type) {
+            case 'group':
+                return group.info.number + '/' + group.info.level + ' ' + group.info.name;
+            case 'professor':
+                return group.info.lastName + ' ' + group.info.firstName[0] + '. ' + group.info.patronymic[0] + ' ' + group.info.kafedra;
+        }
     };
 
     scope.gotoNextDay = function () {
