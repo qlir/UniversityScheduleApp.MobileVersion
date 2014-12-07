@@ -1,5 +1,5 @@
 ﻿angular.module("myapp", []).controller("angularCtrl", function ($scope) {
-    AppController($scope);
+    AngularController($scope);
 });
 
 Date.prototype.getWeekDay = function(){
@@ -9,3 +9,7 @@ Date.prototype.getWeekDay = function(){
 
 window.months = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября ", "Декабря"];
 window.days = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"];
+/*
+
+*/
+

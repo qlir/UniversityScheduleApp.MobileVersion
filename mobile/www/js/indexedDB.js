@@ -33,7 +33,7 @@ function Indb(namedb, versiondb) {
             }
         };
 
-        request.onsuccess = function(e) {
+        request.onsuccess = function (e) {
             db = request.result;
             log("idb.create" + db);
             if (onsuccess) onsuccess();
@@ -50,18 +50,22 @@ function Indb(namedb, versiondb) {
         };
     };
 
-    this.addItemsToStore = function (storeName, items, options, response) {
+    this.addItemsToStore = function (storeName, items, onsuccess, onerror) {
         log('addItemsToStore:');
         log(items);
         var successErrorArray = [],
             objectStore = db.transaction([storeName], "readwrite").objectStore(storeName);
         for (var i in items) {
-            var request = objectStore.add(items[i]);
-            request.onerror = request.success = function (e) {
-                log(e)
+            var request = objectStore.put(items[i]);
+            request.onerror = request.onsuccess = function (e) {
+                if (e.type == "error") {
+                    onerror && onerror(e);
+                    throw e;
+                    return;
+                }
                 successErrorArray.push(e);
-                if (response && successErrorArray.length == items.length) {
-                    response(successErrorArray);
+                if (onsuccess && successErrorArray.length == items.length) {
+                    onsuccess(successErrorArray);
                 }
             };
         }

@@ -1,4 +1,4 @@
-function AppController($scope) {
+function AngularController($scope) {
     var scope = $scope,
         scheduleCtrl,
         curDate,
@@ -9,16 +9,16 @@ function AppController($scope) {
             }, 0);
         },
 
-        datepickerInit = function(){
+        datepickerInit = function () {
             $('#daysPanel').DatePicker({
                 date: curDate,
                 current: curDate,
                 starts: 1,
                 position: 'r',
-                onBeforeShow: function() {
+                onBeforeShow: function () {
                     $('#daysPanel').DatePickerSetDate(curDate, true);
                 },
-                onChange: function(formated, dates){
+                onChange: function (formated, dates) {
                     setCurDate(dates);
                     updateScheduleForCurrentDate();
                     $('#daysPanel').DatePickerHide();
@@ -94,19 +94,28 @@ function AppController($scope) {
     };
 
     scope.onSelectGroup = function (group) {
-        scope.currentGroup = group;
-        scheduleCtrl.changeGroup(group,function(){
+        scheduleCtrl.changeGroup(group, function () {
+            scope.currentGroup = group;
             updateScheduleForCurrentDate();
-        },gErr);
+        }, gErr);
+    };
+
+    scope.onSelectServerGroup = function (group) {
+        scope.currentGroup = group;
+        scheduleCtrl.loadServerSchedule(group, function () {
+            scheduleCtrl.changeGroup(group, function () {
+                updateScheduleForCurrentDate();
+            }, gErr);
+        }, gErr);
     };
 
     scope.getGroupTitle = function (group) {
-        if(!group) return;
+        if (!group) return;
         switch (group.type) {
             case 'group':
                 return group.info.number + '/' + group.info.level + ' ' + group.info.name;
             case 'professor':
-                return group.info.lastName + ' ' + group.info.firstName[0] + '. ' + group.info.patronymic[0] + ' ' + group.info.kafedra;
+                return group.info.lastName + ' ' + group.info.firstName[0] + '. ' + group.info.patronymic[0] + '. Кафедра:' + group.info.kafedra;
         }
     };
 

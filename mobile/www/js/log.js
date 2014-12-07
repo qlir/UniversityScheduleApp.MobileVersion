@@ -10,6 +10,6 @@ function log(mes,teg){
 }
 
 function gErr(e) {
-    log("error:: ");
-    log(e);
+    console.log("error:: ");
+    console.log(e);
 }

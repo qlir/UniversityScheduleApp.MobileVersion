@@ -64,7 +64,8 @@ body{
     top:0;
     left: 0px;
     height: 100%;
-    width: 20px;
+    width: 30px;
+    background-color: rgba(0, 0, 0, 0.32);
 
 }
 
@@ -73,8 +74,8 @@ body{
     top:0;
     right: 0px;
     height: 100%;
-    width: 20px;
-
+    width: 30px;
+    background-color: #ababab;
 }
 
 .scheduleItems {
@@ -108,6 +109,7 @@ body{
    position: fixed;
    width: 100%;
    top:0;
+   right:0;
    height: 79px;
    background-color: cornflowerblue;
 }
@@ -117,23 +119,26 @@ body{
     font-stretch: condensed;
     font-size: 14pt;
     color: #ffffff;
-    background-color: cornflowerblue;
+    background-color: #440397;
 }
 
 .group {
-    margin-top: 2px;
-    width: 100%;
+    width: 96%;
     height: 48px;
+    margin: 2px 2% !important;
 }
 
 .bottomPanel {
-    bottom: 0;
-    position: fixed;
-    width: 100%;
-    height:42px;
+    height: 42px;
     background-color: #dddddd;
 }
 
 .bottomButton {
     height: 40px;
+    padding: 0;
+}
+
+.bottomButton img {
+    margin: auto;
+    height: 30px;
 }

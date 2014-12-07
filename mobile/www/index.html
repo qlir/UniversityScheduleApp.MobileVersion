@@ -8,8 +8,6 @@
     -->
     <meta http-equiv="x-ru-compatible" content="IE=edge">
 
-    <title>BlankCordovaApp1</title>
-
     <link href="lib/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="lib/bootstrap-3.2.0/css/bootstrap-theme.min.css">
     <link href="lib/datepicker/css/datepicker.css" rel="stylesheet"/>
@@ -29,7 +27,7 @@
     <script src="js/RequestController.js"></script>
     <script src="js/StorageController.js"></script>
     <script src="js/ScheduleController.js"></script>
-    <script src="js/appController.js"></script>
+    <script src="js/AngularController.js"></script>
 
     <script src="lib/moment.js"></script>
     <script src="lib/bootstrap-datetimepicker.js"></script>
@@ -40,7 +38,7 @@
 <!-- Split button -->
 <!--<h1 class="topPanel panel panel-primary"><span>Группа 4/42</span><b class="caret"></b><button class="menuButton btn btn-default btn-lg pull-right ">Menu</button></h1>-->
 <div class="schedule">
-    <div class="daysPanel">
+    <div  ng-disabled="!currentGroup" class="daysPanel">
         <div class="day" id='daysPanel'>
             <div>{{scheduleDate}}</div>
             <div>{{scheduleDay}}</div>
@@ -66,7 +64,7 @@
                 <h4 class="time ">{{les.startTime}}-{{les.endTime}}</h4>
                 <h4 class="lessonName">{{les.name}}</h4>
 
-                <div class="description">{{les.type}}, {{les.room}}, {{les.professor}}</div>
+                <div class="description">{{les.type}}, {{les.room}}, {{les.professor || les.group}}</div>
             </a>
         </div>
     </div>
@@ -76,14 +74,18 @@
 <div class="topPanel">
     <div class="title">Рассписание ИГХТУ</div>
     <button class="group btn btn-primary btn-lg" ng-click="loadGroupsList()" type="button" data-toggle="modal"
-            data-target=".groupsList">{{getGroupTitle(currentGroup)}}<span class="caret"></span></button>
+            data-target=".groupsList">{{getGroupTitle(currentGroup)||"выберите рассписание"}}<span class="caret"></span></button>
 </div>
-<div class="bottomPanel btn-group btn-group-justified">
-    <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
-    <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
-    <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
-    <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
-    <a type="button" role="button" class="bottomButton btn btn-lg btn-primary"></a>
+<div class="bottomPanel row">
+    <button type="button" role="button" class="bottomButton col-xs-4 btn btn-lg btn-primary">
+        <img src="img/clock.png" />
+    </button>
+    <button type="button" role="button" class="bottomButton col-xs-4 btn btn-lg btn-primary">
+        <img src="img/setting.png" />
+    </button>
+    <button type="button" role="button" class="bottomButton col-xs-4 btn btn-lg btn-primary">
+        <img src="img/date.png" />
+    </button>
 </div>
 <div class="modal fade groupsList" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -94,11 +96,12 @@
                 <h4 class="modal-title" id="myLargeModalLabel">Выбор группы</h4>
             </div>
             <div class="list-group">
-                <!--<a href="#" class="list-group-item active">
-                    Cras justo odio
-                </a>
-            -->
+                <p href="#" class="list-group-item" ng-if="localGroupsList" data-dismiss="modal" style="background-color: darkgray">НА ТЕЛЕФОНЕ</p>
                 <a href="#" class="list-group-item" ng-repeat="g in localGroupsList" ng-click="onSelectGroup(g)"
+                   data-dismiss="modal">{{getGroupTitle(g)}}</a>
+
+                <p href="#" ng-if="internetGroupsList" class="list-group-item" data-dismiss="modal" style="background-color: darkgray">НА СЕРВЕРЕ</p>
+                <a href="#" class="list-group-item" ng-repeat="g in internetGroupsList" ng-click="onSelectServerGroup(g)"
                    data-dismiss="modal">{{getGroupTitle(g)}}</a>
             </div>
         </div>

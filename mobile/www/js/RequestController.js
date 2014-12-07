@@ -1,21 +1,19 @@
 function RequestController() {
+// https://universchedule.herokuapp.com
     this.getGroupsList = function (onsuccess, onerror) {
-        $.get(groupListUrl,function (response) {
-            onsuccess(response);
-        }).fail(function (e) {
-                onerror(e);
-            });
+        $.ajax({
+            type: "GET",
+            url: "https://universchedule.herokuapp.com/schedulesList"
+        }).done(onsuccess).fail(onerror);
     };
 
-    this.getScheduleOfGroup = function (idGroup, onsuccess, onerror) {
-        $.get(this.generateUrlByGroupId(idGroup),function (response) {
-            onsuccess(response);
-        }).fail(function (e) {
-                onerror(e);
-            });
-    };
-
-    this.getGroupsList = function () {
-        log("RequestController.getGroupsList");
+    this.getScheduleByGroupID = function (groupId, onsuccess, onerror) {
+        $.ajax({
+            type: "GET",
+            url: "https://universchedule.herokuapp.com/schedule/",
+            data:{
+                id:groupId
+            }
+        }).done(onsuccess).fail(onerror);
     };
 }

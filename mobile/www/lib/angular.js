@@ -1280,7 +1280,7 @@ function encodeUriQuery(val, pctEncodeSpaces) {
  * contain the code. See {@link angular.module} for more information.
  *
  * In the example below if the `ngApp` directive were not placed on the `html` element then the
- * document would not be compiled, the `AppController` would not be instantiated and the `{{ a+b }}`
+ * document would not be compiled, the `AngularController` would not be instantiated and the `{{ a+b }}`
  * would not be resolved to `3`.
  *
  * `ngApp` is the easiest, and most common, way to bootstrap an application.
