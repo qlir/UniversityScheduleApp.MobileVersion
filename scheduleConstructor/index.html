@@ -3,7 +3,6 @@
 <title>Моя верстка </title>
 <head>
     <script src="lib/jquery-2.1.1.js"></script>
-    <!--можешь не понимать след 3 строчки потом объясню-->
     <!-- Bootstrap Core CSS -->
     <link href="lib/bootstrap-3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -16,7 +15,7 @@
 
 
     <script src="lib/angular.js"></script>
-    <script src="js/dbController.js"></script>
+    <script src="js/RequestController.js"></script>
     <script src="js/appController.js"></script>
     <script src="js/angularController.js"></script>
     <script src="js/index.js"></script>
@@ -24,22 +23,86 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body ng-controller="angularCtrl">
-{{hello}}
 <div class="box">
-<div class="header">Онлайн-сервис по составлению расписания</div>
+<div class="header"><h4 id="headLabel">Онлайн-сервис по составлению расписания</h4>
+
+    <div class="menu">
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal3">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        </button>
+    </div>
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel3">Настройки</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="itemContainer">
+                        <h5 class="leftLabel">Период с </h5>
+
+                        <div class="rightDropdown2">
+                            <form id="data"></form>
+                            <input name="beginPeriod" form="data" class="rightInput">
+                        </div>
+                    </div>
+                    <div class="itemContainer">
+                        <h5 class="leftLabel">по</h5>
+
+                        <div class="rightDropdown2">
+                            <form id="data2"></form>
+                            <input name="endPeriod" form="data" class="rightInput">
+                        </div>
+                    </div>
+                    <div class="itemContainer">
+                        <h5 class="leftLabel">Начинать с учебной недели:</h5>
+
+                        <div class="rightDropdown2">
+                            <button class="btn btn-default dropdown-toggle-lg" type="button" data-toggle="dropdown">
+                                {{selectWeek}}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation" ng-click="onChangeSelectWeek(w)" ng-repeat="w in weekArray">
+                                    <a role="menuitem" tabindex="-1" href="#">{{w}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="itemContainer">
+                        <h5 class="leftLabel">Адрес сервера</h5>
+
+                        <div class="rightDropdown2">
+                            <form id="data3"></form>
+                            <input name="server" form="data" class="rightInput">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="aside">
     <input type="text" id="sear" class="form-control" placeholder="Поиск..."/>
+    <h4 id="sortLabel">Сортировать по:</h4>
 
     <div class="dropdown">
         <button id="sort" class="btn btn-default dropdown-toggle-lg" type="button" id="dropdownMenu1"
                 data-toggle="dropdown">
-            Сортировать по...
+            {{selectSort}}
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Курсы</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Факультеты</a></li>
-            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Группы</a></li>
+            <li role="presentation" ng-click="onChangeSelectSort(sort)" ng-repeat="sort in sortArray"><a role="menuitem"
+                                                                                                         tabindex="-1"
+                                                                                                         href="#">{{sort}}</a>
+            </li>
         </ul>
     </div>
     <div class="panel-group" id="accordion">
@@ -47,41 +110,13 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        Item #1
+                        ХТиК
                     </a>
                 </h4>
             </div>
             <div id="collapseOne" class="panel-collapse collapse in">
                 <div class="panel-body">
-                    Пример 1
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                        Item #2
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse">
-                <div class="panel-body">
-                    Пример 2
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                        Item #3
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse">
-                <div class="panel-body">
-                    Пример3
+                    42
                 </div>
             </div>
         </div>
@@ -103,63 +138,68 @@
                     <h4 class="leftLabel">Курс</h4>
 
                     <div class="rightDropdown dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2"
-                                data-toggle="dropdown">
-                            1 курс
+                        <button class="btn btn-default dropdown-toggle" type="button"
+                                data-toggle="dropdown">{{selectCourse}}
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1 курс</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">2 курс</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">3 курс</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">4 курс</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">5 курс</a></li>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="presentation" ng-click="onChangeSelectCourse(c)" ng-repeat="c in courseArray"><a
+                                    role="menuitem" tabindex="-1" href="#">{{c}}</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="itemContainer">
-                    <h6 class="leftLabel">Факультет</h6>
+                    <h4 class="leftLabel">Факультет</h4>
 
                     <div class="rightDropdown dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3"
                                 data-toggle="dropdown">
-                            Выберите Факультет
+                            {{selectFaculty}}
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ХТиК</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ИУФиС</a></li>
+                            <li role="presentation" ng-click="onChangeSelectFaculty(f)" ng-repeat="f in facultyArray"><a
+                                    role="menuitem" tabindex="-1" href="#">{{f}}</a></li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation">
+                                <form id="data4"></form>
+                                <input name="endPeriod" form="data" placeholder="введите новое значение"
+                                       class="rightInput"></li>
                         </ul>
                     </div>
                 </div>
                 <div class="itemContainer">
-                    <h6 class="leftLabel">Группа</h6>
+                    <h4 class="leftLabel">Группа</h4>
 
                     <div class="rightDropdown dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu4"
                                 data-toggle="dropdown">
-                            Выберите группу
+                            {{selectGroup}}
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">1</a></li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">2</a></li>
+                            <li role="presentation"><a role="menuitem" ng-click="onChangeSelectGroup(g)"
+                                                       ng-repeat="g in groupArray" tabindex="-1" href="#">{{g}}</a></li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Новая группа</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="itemContainer">
-                    <h6 class="leftLabel">Специальность</h6>
+                    <h4 class="leftLabel">Специальность</h4>
 
                     <div class="rightDropdown dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu5"
                                 data-toggle="dropdown">
-                            Выберите специальность
+                            {{selectSpeciality}}
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Информационные системы</a>
+                            <li role="presentation" ng-click="onChangeSelectSpeciality(s)"
+                                ng-repeat="s in specialityArray"><a role="menuitem" tabindex="-1" href="#">{{s}}</a>
                             </li>
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Экономика в управлении</a>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Новая специальность</a>
                             </li>
                         </ul>
                     </div>
@@ -173,195 +213,283 @@
     </div>
 </div>
 <div class="section">
-    <div class="describes">
-        <h5>Расписание для: Химической техники и кибернетики - 5/42 - Информационные технологии</h5>
-        <h5>На период: с 1.09.2014. по 31.12.2014</h5>
-    </div>
-    <table class="items schedule">
-        <tbody>
-        <tr>
-            <td class="weekDay ">Понедельник</td>
-            <td class="lessons  list-group">
-                <div class="list-group-item">8.00-9.35 Маркетин ИС, Власов А.П., ДК9 , ПЗ.</div>
-                <div class="list-group-item">9.50-11.25 Професс.иностр.язык, д. Костина Е.В, "К" 408, ПЗ.
-                </div>
-                <div class="list-group-item">11.40-13.15 Управление персоналом, ст.пр. Жарницкая Н.Ф., А 104, лек.
-                </div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </td>
-            <td class="lessons  list-group">
-                <div class="list-group-item">8.00-9.35 Техн.-эконом. анализ предприятий, ст.пр. Белоконская Е.Г., А104,
-                    лек.
-                </div>
-                <div class="list-group-item">8.00-9.35 Техн.-эконом. анализ предприятий, ст.пр. Белоконская Е.Г., А17,
-                    ПЗ.
-                </div>
-                <div class="list-group-item">Управление персоналом,ст.пр. Жарницкая Н.Ф., А 17, ПЗ
-                </div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="weekDay ">Вторник</td>
-            <td class="lessons  list-group">
-                <div class="list-group-item">8.00-9.35 Информ. технологии на предприятии, д. Галиаскаров Э.Г., ДК9, лек.
-                </div>
-                <div class="list-group-item">9.50-11.25 Информ. технологии на предприятии, ДК 13, лаб.
-                </div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </td>
-            <td class="lessons  list-group">
-                <div class="list-group-item">8.00-9.35 Маркетинг информационных услуг,д .Власов А.П.,ДК9, лек.
-                </div>
-                <div class="list-group-item">9.35-11.25 Маркетинг информационных услуг,д .Власов А.П.,ДК13, ПЗ.</div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="weekDay ">Среда</td>
-            <td class="lessons  list-group">
-                <div class="list-group-item">8.00-9.35 Информ. технологии на предприятии, д. Галиаскаров Э.Г., ДК9,
-                    лек.
-                </div>
-                <div class="list-group-item">9.35-11.25 Маркетинг информационных услуг,д .Власов А.П.,ДК13, ПЗ.</div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </td>
-            <td class="lessons  list-group">
-                <div class="list-group-item">8.00-9.35 Маркетинг информационных услуг,д .Власов А.П.,ДК9, лек.</div>
-                <div class="list-group-item">9.35-11.25 Маркетинг информационных услуг,д .Власов А.П.,ДК13, ПЗ.</div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="weekDay ">Четверг</td>
-            <td class="lessons  list-group">
-                <div class="list-group-item">8.00-9.35 Маркетинг информационных услуг,д .Власов А.П.,ДК13, ПЗ.</div>
-                <div class="list-group-item">9.50-11.25 Информ. технологии на предприятии, д. Галиаскаров Э.Г., ДК
-                    13,ПЗ.
-                </div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </td>
-            <td class="lessons  list-group">
-                <div class="list-group-item">8.00-9.35 Маркетинг информационных услуг,д .Власов А.П.,ДК9, лек.</div>
-                <div class="list-group-item">9.50-11.25 Информ. технологии на предприятии, д. Галиаскаров Э.Г., ДК
-                    13,ПЗ.
-                </div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="weekDay ">Пятница</td>
-            <td class="lessons  list-group">
-                <div class="list-group-item">8.00-9.35 Мировые информационные ресурсы, д. Власов А.Г., ДК13, лек.</div>
-                <div class="list-group-item">9.50-11.25 Мировые информационные ресурсы,д. Власов А.Г.,ДК13, лаб.
-                </div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </td>
-            <td class="lessons  list-group">
-                <div class="list-group-item">8.00-9.25 Професс.иностр.язык, д. Костина Е.В, "К" 408, ПЗ.</div>
-                <div class="list-group-item">9.50-11.25 Мировые информационные ресурсы,д. Власов А.Г.,ДК13, лаб.</div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="weekDay ">Суббота</td>
-            <td class="lessons  list-group">
-                <div class="list-group-item">День самоподготовки</div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </td>
-            <td class="lessons  list-group">
-                <div class="list-group-item">День самоподготовки</div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="weekDay">Воскресенье</td>
-            <td class="lessons list-group">
-                <div class="list-group-item">Выходной</div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </td>
-            <td class="lessonslist-group">
-                <div class="list-group-item">Выходной</div>
-                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span
-                            aria-hidden="true">&times;</span><span
-                            class="sr-only">Close</span></button>
-                    <h4 class="modal-title" id="myModalLabel2">Введите данные..</h4>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-bordered">
-                        <tbody>
-                        <tr>
-                            <td class="string">Время</td>
-                            <td class="string">Предмет</td>
-                            <td class="string">Преподаватель</td>
-                            <td class="string">Тип занятия</td>
-                            <td class="string">Аудитория</td>
-                        </tr>
-                        <tr>
-                            <td class="string">
-                                <form class="form-inline" role="form">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="exampleInput"
-                                               placeholder="введите время">
-                                    </div>
-                                </form>
-                            </td>
-                            <td class="string">Предмет</td>
-                            <td class="string">Преподаватель</td>
-                            <td class="string">Тип занятия</td>
-                            <td class="string">Аудитория</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Сохранить</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                    </div>
+<div class="describes">
+    <h5>Расписание для:</h5>
+    <h5>На период:</h5>
+</div>
+<table class="items schedule">
+    <tbody>
+    <tr>
+        <td class="weekDay ">Понедельник
+        </td>
+        <td class="lessons  list-group">
+            <div class="list-group-item" ng-repeat="les in schedule.monday1">{{les.begin_time}}-{{les.end_time}}
+                {{les.discipline}}, {{les.teacher}}, {{les.auditory}}, {{les.type}}
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+        <td class="lessons  list-group">
+            <div class="list-group-item" ng-repeat="les in schedule.monday2">{{les.begin_time}}-{{les.end_time}}
+                {{les.discipline}}, {{les.teacher}}, {{les.auditory}}, {{les.type}}
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <td class="weekDay ">Вторник</td>
+        <td class="lessons  list-group">
+            <div class="list-group-item" ng-repeat="les in schedule.tuesday1">{{les.begin_time}}-{{les.end_time}}
+                {{les.discipline}}, {{les.teacher}}, {{les.auditory}}, {{les.type}}
+            </div>
+
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+        <td class="lessons  list-group">
+            <div class="list-group-item" ng-repeat="les in schedule.tuesday2">{{les.begin_time}}-{{les.end_time}}
+                {{les.discipline}}, {{les.teacher}}, {{les.auditory}}, {{les.type}}
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <td class="weekDay ">Среда</td>
+        <td class="lessons  list-group">
+            <div class="list-group-item" ng-repeat="les in schedule.wednesday1">{{les.begin_time}}-{{les.end_time}}
+                {{les.discipline}}, {{les.teacher}}, {{les.auditory}}, {{les.type}}
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+        <td class="lessons  list-group">
+            <div class="list-group-item" ng-repeat="les in schedule.wednesday2">{{les.begin_time}}-{{les.end_time}}
+                {{les.discipline}}, {{les.teacher}}, {{les.auditory}}, {{les.type}}
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <td class="weekDay ">Четверг</td>
+        <td class="lessons  list-group">
+            <div class="list-group-item" ng-repeat="les in schedule.thursday1">{{les.begin_time}}-{{les.end_time}}
+                {{les.discipline}}, {{les.teacher}}, {{les.auditory}}, {{les.type}}
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+        <td class="lessons  list-group">
+            <div class="list-group-item" ng-repeat="les in schedule.thursday2">{{les.begin_time}}-{{les.end_time}}
+                {{les.discipline}}, {{les.teacher}}, {{les.auditory}}, {{les.type}}
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <td class="weekDay ">Пятница</td>
+        <td class="lessons  list-group">
+            <div class="list-group-item" ng-repeat="les in schedule.friday1">{{les.begin_time}}-{{les.end_time}}
+                {{les.discipline}}, {{les.teacher}}, {{les.auditory}}, {{les.type}}
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+        <td class="lessons  list-group">
+            <div class="list-group-item" ng-repeat="les in schedule.friday2">{{les.begin_time}}-{{les.end_time}}
+                {{les.discipline}}, {{les.teacher}}, {{les.auditory}}, {{les.type}}
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <td class="weekDay ">Суббота</td>
+        <td class="lessons  list-group">
+            <div class="list-group-item" ng-repeat="les in schedule.saturday1">{{les.begin_time}}-{{les.end_time}}
+                {{les.discipline}}, {{les.teacher}}, {{les.auditory}}, {{les.type}}
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+        <td class="lessons  list-group">
+            <div class="list-group-item" ng-repeat="les in schedule.saturday2">{{les.begin_time}}-{{les.end_time}}
+                {{les.discipline}}, {{les.teacher}}, {{les.auditory}}, {{les.type}}
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <td class="weekDay">Воскресенье</td>
+        <td class="lessons list-group">
+            <div class="list-group-item" ng-repeat="les in schedule.sunday2">{{les.record}}</div>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+        <td class="lessonslist-group">
+            <div class="list-group-item" ng-repeat="les in schedule.sunday2">{{les.record}}</div>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal2">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span
+                        aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel2">Введите данные..</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <td class="string">Время</td>
+                        <td class="string">Время конца</td>
+                        <td class="string">Предмет</td>
+                        <td class="string">Преподаватель</td>
+                        <td class="string">Тип занятия</td>
+                        <td class="string">Аудитория</td>
+                    </tr>
+                    <tr>
+                        <td class="string">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                                        aria-expanded="true">
+                                    {{selectBeginTime}}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li role="presentation" ng-click="onChangeSelectTime1(t1)"
+                                        ng-repeat="t1 in timeBeginArray"><a role="menuitem" tabindex="-1" href="#">{{t1}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="string">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                                        aria-expanded="true">
+                                    {{selectEndTime}}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation" ng-click="onChangeSelectTime2(t2)"
+                                        ng-repeat="t2 in timeEndArray"><a role="menuitem" tabindex="-1"
+                                                                          href="#">{{t2}}</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="string">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                                        aria-expanded="true">
+                                    {{selectDiscipline}}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation" ng-click="onChangeSelectDiscipline(dis)"
+                                        ng-repeat="dis in disciplineArray"><a role="menuitem" tabindex="-1" href="#">{{dis}}</a>
+                                    </li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Новый предмет</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="string">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                                        aria-expanded="true">
+                                    {{selectTeacher}}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation" ng-click="onChangeSelectTeacher(teac)"
+                                        ng-repeat="teac in teacherArray"><a role="menuitem" tabindex="-1" href="#">{{teac}}</a>
+                                    </li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Новый
+                                        преподователь</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="string">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                                        aria-expanded="true">
+                                    {{selectType}}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li role="presentation" ng-click="onChangeSelectType(typ)"
+                                        ng-repeat="typ in typeArray"><a role="menuitem" tabindex="-1"
+                                                                        href="#">{{typ}}</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td class="string">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"
+                                        aria-expanded="true">
+                                    {{selectAuditory}}
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation" ng-click="onChangeSelectAuditory(aud)"
+                                        ng-repeat="aud in auditoryArray"><a role="menuitem" tabindex="-1" href="#">{{aud}}</a>
+                                    </li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Новая
+                                        аудитория</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Сохранить</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div class="buttonContainer">
+    <button type="button" class="btn btn-block btn-sm">
+        <span class="glyphicon glyphicon-share"></span>Сохранить на сервер
+    </button>
+    <div>
+        <button type="button" class="btn btn-block btn-sm">
+            <span class="glyphicon glyphicon-save"></span>Сохранить в Excel
+        </button>
+    </div>
+</div>
+</div>
 <div class="footer">
-    Copyright Хватова Елена.
 </div>
 </div>
 </body>
